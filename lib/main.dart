@@ -44,6 +44,7 @@ class _MyAppState extends State<MyApp> {
 
   void _startCountDown() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
+
       if (_timeLeft > 0 && _questionIndex <= 5) {
         setState(() {
           _timeLeft--;
@@ -63,6 +64,7 @@ class _MyAppState extends State<MyApp> {
       _score1 = 0;
       _score2 = 0;
       name = "player 1";
+      _startCountDown();
     });
   }
 
@@ -148,14 +150,6 @@ class _MyAppState extends State<MyApp> {
                         answerquestion: _answerQuestion,
                         questionindex: _questionIndex,
                       ),
-                      // const RotatedBox(
-                      //   quarterTurns: -1,
-                      //   child: LinearProgressIndicator(
-                      //     value: 0.42,
-                      //     valueColor: AlwaysStoppedAnimation(Colors.orange),
-                      //     backgroundColor: Colors.blue,
-                      //   ),
-                      // ),
                       Text(
                         _timeLeft.toString(),
                         style:
