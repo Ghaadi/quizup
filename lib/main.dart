@@ -64,7 +64,9 @@ class _MyAppState extends State<MyApp> {
       _score1 = 0;
       _score2 = 0;
       name = "player 1";
-      _startCountDown();
+      if(_isPlaying) {
+        _startCountDown();
+      }
     });
   }
 
