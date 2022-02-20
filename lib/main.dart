@@ -152,7 +152,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    getData();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
@@ -171,9 +170,9 @@ class _MyAppState extends State<MyApp> {
                         children: [
                           TweenAnimationBuilder(
                             tween: Tween(
-                                    begin: _timeLeft / 10 - 1,
-                                    end: _timeLeft / 10,
-                                  ),
+                              begin: _timeLeft / 10 - 1,
+                              end: _timeLeft / 10,
+                            ),
                             duration: (_timeLeft == 10)
                                 ? const Duration(seconds: 0)
                                 : const Duration(seconds: 1),
