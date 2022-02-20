@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
 
 import './question.dart';
@@ -7,7 +9,9 @@ import './quiz.dart';
 import './result.dart';
 import './menu.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -44,7 +48,6 @@ class _MyAppState extends State<MyApp> {
 
   void _startCountDown() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
-
       if (_timeLeft > 0 && _questionIndex <= 5) {
         setState(() {
           _timeLeft--;
@@ -66,6 +69,19 @@ class _MyAppState extends State<MyApp> {
       name = "player 1";
       _startCountDown();
     });
+  }
+
+  CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('Questions');
+
+  Future<void> getData() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    // Get data from docs and convert map to List
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    print(allData);
   }
 
   final questions = const [
@@ -137,6 +153,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),

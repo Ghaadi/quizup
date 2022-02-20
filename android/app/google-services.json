@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "875609410159",
+    "project_id": "quizup-1d2bb",
+    "storage_bucket": "quizup-1d2bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875609410159:android:e1255a87d34795218e9b9a",
+        "android_client_info": {
+          "package_name": "com.example.quizup_prototype"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875609410159-kv81cl3ld6ptqep1squl8560mdv3ecfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC21mU8klYl-apq50YsL3ehVn_SiisGAys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875609410159-kv81cl3ld6ptqep1squl8560mdv3ecfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
