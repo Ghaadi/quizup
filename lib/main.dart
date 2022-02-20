@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
 
-import './question.dart';
-import './answer.dart';
 import './quiz.dart';
 import './result.dart';
 import './menu.dart';
@@ -22,7 +20,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
-  var _totalScore = 0;
   var _timeLeft = 10;
   var _score1 = 0;
   var _score2 = 0;
@@ -62,12 +59,13 @@ class _MyAppState extends State<MyApp> {
   void _resetQuiz() {
     setState(() {
       _questionIndex = 0;
-      _totalScore = 0;
       _timeLeft = 10;
       _score1 = 0;
       _score2 = 0;
       name = "player 1";
-      _startCountDown();
+      if (_isPlaying) {
+        _startCountDown();
+      }
     });
   }
 
@@ -149,6 +147,7 @@ class _MyAppState extends State<MyApp> {
 
       _timeLeft = 10;
     });
+    // Timer(const Duration(milliseconds: 100), () {});
   }
 
   @override
@@ -164,13 +163,42 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       Quiz(
                         questions: questions,
-                        answerquestion: _answerQuestion,
-                        questionindex: _questionIndex,
+                        answerQuestion: _answerQuestion,
+                        questionIndex: _questionIndex,
                       ),
-                      Text(
-                        _timeLeft.toString(),
-                        style:
-                            const TextStyle(fontSize: 35, color: Colors.blue),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TweenAnimationBuilder(
+                            tween: Tween(
+                                    begin: _timeLeft / 10 - 1,
+                                    end: _timeLeft / 10,
+                                  ),
+                            duration: (_timeLeft == 10)
+                                ? const Duration(seconds: 0)
+                                : const Duration(seconds: 1),
+                            builder: (context, time, _) => SizedBox(
+                              width: 70,
+                              height: 70,
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  CircularProgressIndicator(
+                                    value: time as double,
+                                    strokeWidth: 8,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      _timeLeft.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 35, color: Colors.blue),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Text(
                         name,
