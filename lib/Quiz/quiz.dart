@@ -13,12 +13,13 @@ class Quiz extends StatelessWidget {
   final Color _timerColor = const Color(0xFF28A745);
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
+  final Color _backgroundColor = const Color(0xFF2E3532);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.grey[800],
-      backgroundColor: const Color(0xFF2E3532), // Outer Space Crayola
+      backgroundColor: _backgroundColor, // Outer Space Crayola
       body: Column(
         children: [
           Stack(
