@@ -14,6 +14,59 @@ class Quiz extends StatelessWidget {
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
+  int questionNum = 0;
+  final questions = const [
+    {
+      'questionText': 'What country does this flag represent?',
+      'answers': [
+        {'text': 'Lebanon', 'score': 1},
+        {'text': 'USA', 'score': 0},
+        {'text': 'Australia', 'score': 0},
+        {'text': 'Canada', 'score': 0},
+      ],
+      'picture': './imgs/usa.png',
+    },
+    {
+      'questionText': 'Who created Microsoft',
+      'answers': [
+        {'text': 'Bill Gates', 'score': 1},
+        {'text': 'Donald Trump', 'score': 0},
+        {'text': 'Steve Jobs', 'score': 0},
+      ],
+    },
+    {
+      'questionText': 'Where is Beirut ',
+      'answers': [
+        {'text': 'Brazil', 'score': 0},
+        {'text': 'Emirates', 'score': 0},
+        {'text': 'Lebanon', 'score': 1},
+      ],
+    },
+    {
+      'questionText': 'Who is the president of America',
+      'answers': [
+        {'text': 'clint eastwood', 'score': 0},
+        {'text': 'tom hanks', 'score': 0},
+        {'text': 'joe biden', 'score': 1},
+      ],
+    },
+    {
+      'questionText': 'Who created Microsoft',
+      'answers': [
+        {'text': 'Bill Gates', 'score': 1},
+        {'text': 'Donald Trump', 'score': 0},
+        {'text': 'Steve Jobs', 'score': 0},
+      ],
+    },
+    {
+      'questionText': 'Where is Beirut ',
+      'answers': [
+        {'text': 'Brazil', 'score': 0},
+        {'text': 'Emirates', 'score': 0},
+        {'text': 'Lebanon', 'score': 1},
+      ],
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
