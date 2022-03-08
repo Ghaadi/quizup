@@ -19,52 +19,72 @@ class Quiz extends StatelessWidget {
     {
       'questionText': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Lebanon', 'score': 1},
-        {'text': 'USA', 'score': 0},
+        {'text': 'England', 'score': 0},
+        {'text': 'USA', 'score': 1},
         {'text': 'Australia', 'score': 0},
         {'text': 'Canada', 'score': 0},
       ],
-      'picture': './imgs/usa.png',
+      'picture': './imgs/Flags/USA.png',
     },
     {
-      'questionText': 'Who created Microsoft',
+      'questionText': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Bill Gates', 'score': 1},
-        {'text': 'Donald Trump', 'score': 0},
-        {'text': 'Steve Jobs', 'score': 0},
-      ],
-    },
-    {
-      'questionText': 'Where is Beirut ',
-      'answers': [
+        {'text': 'Syria', 'score': 0},
         {'text': 'Brazil', 'score': 0},
-        {'text': 'Emirates', 'score': 0},
+        {'text': 'Jordan', 'score': 0},
         {'text': 'Lebanon', 'score': 1},
       ],
+      'picture': './imgs/Flags/Lebanon.png',
     },
     {
-      'questionText': 'Who is the president of America',
+      'questionText': 'What country does this flag represent?',
       'answers': [
-        {'text': 'clint eastwood', 'score': 0},
-        {'text': 'tom hanks', 'score': 0},
-        {'text': 'joe biden', 'score': 1},
+        {'text': 'Brazil', 'score': 1},
+        {'text': 'Argentina', 'score': 0},
+        {'text': 'Columbia', 'score': 0},
+        {'text': 'Spain', 'score': 0},
       ],
+      'picture': './imgs/Flags/Brazil.png',
     },
     {
-      'questionText': 'Who created Microsoft',
+      'questionText': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Bill Gates', 'score': 1},
-        {'text': 'Donald Trump', 'score': 0},
-        {'text': 'Steve Jobs', 'score': 0},
+        {'text': 'Columbia', 'score': 0},
+        {'text': 'Palestine', 'score': 0},
+        {'text': 'Ireland', 'score': 0},
+        {'text': 'Cuba', 'score': 1},
       ],
+      'picture': './imgs/Flags/Cuba.png',
     },
     {
-      'questionText': 'Where is Beirut ',
+      'questionText': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Brazil', 'score': 0},
-        {'text': 'Emirates', 'score': 0},
-        {'text': 'Lebanon', 'score': 1},
+        {'text': 'Poland', 'score': 0},
+        {'text': 'Finland', 'score': 0},
+        {'text': 'Argentina', 'score': 1},
+        {'text': 'England', 'score': 0},
       ],
+      'picture': './imgs/Flags/Argentina.png',
+    },
+    {
+      'questionText': 'What country does this flag represent?',
+      'answers': [
+        {'text': 'Mexico', 'score': 0},
+        {'text': 'Canada', 'score': 1},
+        {'text': 'Germany', 'score': 0},
+        {'text': 'Belgium', 'score': 0},
+      ],
+      'picture': './imgs/Flags/Canada.png',
+    },
+    {
+      'questionText': 'What country does this flag represent?',
+      'answers': [
+        {'text': 'Belgium', 'score': 0},
+        {'text': 'Netherlands', 'score': 0},
+        {'text': 'France', 'score': 1},
+        {'text': 'Italy', 'score': 0},
+      ],
+      'picture': './France.png',
     },
   ];
 

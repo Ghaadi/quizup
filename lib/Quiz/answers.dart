@@ -8,10 +8,10 @@ class Answers extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+          margin: const EdgeInsets.fromLTRB(0, 15, 0, 8),
           child: Image.asset(
-            "./imgs/usa.png",
-            scale: 0.36,
+            "./imgs/Brazil.png",
+            scale: 0.91,
           ),
         ),
         Row(
