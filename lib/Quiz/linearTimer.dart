@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
-class Timer extends StatelessWidget {
+class LinearTimer extends StatelessWidget {
   final Color _playerColor;
+  final int _timeLeft;
 
-  const Timer(this._playerColor);
+  const LinearTimer(this._playerColor, this._timeLeft);
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +13,10 @@ class Timer extends StatelessWidget {
       width: 15,
       height: 400,
       child: FAProgressBar(
-        currentValue: 100,
+        currentValue: _timeLeft,
         progressColor: _playerColor,
         direction: Axis.vertical,
+        verticalDirection: VerticalDirection.up,
       ),
     );
   }

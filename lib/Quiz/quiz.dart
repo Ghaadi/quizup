@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'dart:async';
 
 import './answers.dart';
 import './question.dart';
@@ -13,7 +14,6 @@ class Quiz extends StatefulWidget {
 }
 
 class QuizState extends State<Quiz> {
-  final Color _timerColor = const Color(0xFF28A745);
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
@@ -91,12 +91,29 @@ class QuizState extends State<Quiz> {
     },
   ];
 
+  var _timeLeft = 108;
+
   void _answerQuestion() {
     if (_questionNum < _questions.length - 1) {
+      _timeLeft = 108;
       setState(() {
+        if (_questionNum == 0) _startCountDown();
         _questionNum++;
       });
     }
+  }
+
+  void _startCountDown() {
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (_timeLeft > 0) {
+        setState(() {
+          _timeLeft--;
+        });
+      } else {
+        timer.cancel();
+        _timeLeft = 108;
+      }
+    });
   }
 
   @override
@@ -109,7 +126,7 @@ class QuizState extends State<Quiz> {
           Stack(
             // Circular Timer and Player Icon
             children: [
-              CircularTimer(_timerColor),
+              CircularTimer(_timeLeft),
               Header(_playerColor, _opponentColor),
             ],
           ),
@@ -118,13 +135,14 @@ class QuizState extends State<Quiz> {
             // Answers between Timer Bars
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Timer(_playerColor).padding(left: 10),
+              LinearTimer(_playerColor, _timeLeft).padding(left: 10),
               Answers(
-                _questions[_questionNum]['answers'] as List<Map<String, Object>>,
+                _questions[_questionNum]['answers']
+                    as List<Map<String, Object>>,
                 _questions[_questionNum]['image'] as String,
                 _answerQuestion,
               ),
-              Timer(_opponentColor).padding(right: 10),
+              LinearTimer(_opponentColor, 100).padding(right: 10),
             ],
           ),
         ],
