@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 
 class Answers extends StatelessWidget {
   final Color _answerColor = const Color(0xFFD6CFCB); // Timberwolf
+  final List<Map<String, Object>> _answers;
+  final String _imgPath;
+  final Function() _answerQuestion;
+
+  const Answers(this._answers, this._imgPath, this._answerQuestion);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(0, 15, 0, 8),
+          margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
           child: Image.asset(
-            "./imgs/Brazil.png",
+            _imgPath,
             scale: 0.91,
           ),
         ),
@@ -21,10 +26,10 @@ class Answers extends StatelessWidget {
               height: 90,
               margin: const EdgeInsets.fromLTRB(0, 10, 12, 10),
               child: ElevatedButton(
-                onPressed: () => print("clicked!"),
-                child: const Text(
-                  "Lebanon",
-                  style: TextStyle(
+                onPressed: _answerQuestion,
+                child: Text(
+                  _answers[0]['text'] as String,
+                  style: const TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
                   ),
@@ -40,10 +45,10 @@ class Answers extends StatelessWidget {
               height: 90,
               margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: ElevatedButton(
-                onPressed: () => print("clicked!"),
-                child: const Text(
-                  "USA",
-                  style: TextStyle(
+                onPressed: _answerQuestion,
+                child: Text(
+                  _answers[1]['text'] as String,
+                  style: const TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
                   ),
@@ -63,10 +68,10 @@ class Answers extends StatelessWidget {
               height: 90,
               margin: const EdgeInsets.fromLTRB(0, 0, 12, 10),
               child: ElevatedButton(
-                onPressed: () => print("clicked!"),
-                child: const Text(
-                  "Australia",
-                  style: TextStyle(
+                onPressed: _answerQuestion,
+                child: Text(
+                  _answers[2]['text'] as String,
+                  style: const TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
                   ),
@@ -82,10 +87,10 @@ class Answers extends StatelessWidget {
               height: 90,
               margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: ElevatedButton(
-                onPressed: () => print("clicked!"),
-                child: const Text(
-                  "Canada",
-                  style: TextStyle(
+                onPressed: _answerQuestion,
+                child: Text(
+                  _answers[3]['text'] as String,
+                  style: const TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
                   ),
