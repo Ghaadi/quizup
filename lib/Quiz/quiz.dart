@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:styled_widget/styled_widget.dart';
-import 'dart:math' as math;
 
 import './answers.dart';
 import './question.dart';
@@ -9,84 +7,97 @@ import './linearTimer.dart';
 import './header.dart';
 import './circularTimer.dart';
 
-class Quiz extends StatelessWidget {
+class Quiz extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => QuizState();
+}
+
+class QuizState extends State<Quiz> {
   final Color _timerColor = const Color(0xFF28A745);
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
-  int questionNum = 0;
-  final questions = const [
+  int _questionNum = 0;
+  final _questions = const [
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'England', 'score': 0},
         {'text': 'USA', 'score': 1},
         {'text': 'Australia', 'score': 0},
         {'text': 'Canada', 'score': 0},
       ],
-      'picture': './imgs/Flags/USA.png',
+      'image': './images/flags/USA.png',
     },
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'Syria', 'score': 0},
         {'text': 'Brazil', 'score': 0},
         {'text': 'Jordan', 'score': 0},
         {'text': 'Lebanon', 'score': 1},
       ],
-      'picture': './imgs/Flags/Lebanon.png',
+      'image': './images/flags/Lebanon.png',
     },
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'Brazil', 'score': 1},
         {'text': 'Argentina', 'score': 0},
         {'text': 'Columbia', 'score': 0},
         {'text': 'Spain', 'score': 0},
       ],
-      'picture': './imgs/Flags/Brazil.png',
+      'image': './images/flags/Brazil.png',
     },
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'Columbia', 'score': 0},
         {'text': 'Palestine', 'score': 0},
         {'text': 'Ireland', 'score': 0},
         {'text': 'Cuba', 'score': 1},
       ],
-      'picture': './imgs/Flags/Cuba.png',
+      'image': './images/flags/Cuba.png',
     },
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'Poland', 'score': 0},
         {'text': 'Finland', 'score': 0},
         {'text': 'Argentina', 'score': 1},
         {'text': 'England', 'score': 0},
       ],
-      'picture': './imgs/Flags/Argentina.png',
+      'image': './images/flags/Argentina.png',
     },
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'Mexico', 'score': 0},
         {'text': 'Canada', 'score': 1},
         {'text': 'Germany', 'score': 0},
         {'text': 'Belgium', 'score': 0},
       ],
-      'picture': './imgs/Flags/Canada.png',
+      'image': './images/flags/Canada.png',
     },
     {
-      'questionText': 'What country does this flag represent?',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'Belgium', 'score': 0},
         {'text': 'Netherlands', 'score': 0},
         {'text': 'France', 'score': 1},
         {'text': 'Italy', 'score': 0},
       ],
-      'picture': './France.png',
+      'image': './images/flags/France.png',
     },
   ];
+
+  void _answerQuestion() {
+    if (_questionNum < _questions.length - 1) {
+      setState(() {
+        _questionNum++;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +113,17 @@ class Quiz extends StatelessWidget {
               Header(_playerColor, _opponentColor),
             ],
           ),
-          Question(), // Question
+          Question(_questions[_questionNum]['question'] as String), // Question
           Row(
             // Answers between Timer Bars
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Timer(_playerColor).padding(left: 10),
-              Answers(),
+              Answers(
+                _questions[_questionNum]['answers'] as List<Map<String, Object>>,
+                _questions[_questionNum]['image'] as String,
+                _answerQuestion,
+              ),
               Timer(_opponentColor).padding(right: 10),
             ],
           ),
