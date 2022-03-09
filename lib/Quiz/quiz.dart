@@ -22,82 +22,95 @@ class QuizState extends State<Quiz> {
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'England', 'score': 0},
-        {'text': 'USA', 'score': 1},
-        {'text': 'Australia', 'score': 0},
-        {'text': 'Canada', 'score': 0},
+        {'text': 'England', 'points': 0},
+        {'text': 'USA', 'points': 1},
+        {'text': 'Australia', 'points': 0},
+        {'text': 'Canada', 'points': 0},
       ],
       'image': './images/flags/USA.png',
     },
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Syria', 'score': 0},
-        {'text': 'Brazil', 'score': 0},
-        {'text': 'Jordan', 'score': 0},
-        {'text': 'Lebanon', 'score': 1},
+        {'text': 'Syria', 'points': 0},
+        {'text': 'Brazil', 'points': 0},
+        {'text': 'Jordan', 'points': 0},
+        {'text': 'Lebanon', 'points': 1},
       ],
       'image': './images/flags/Lebanon.png',
     },
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Brazil', 'score': 1},
-        {'text': 'Argentina', 'score': 0},
-        {'text': 'Columbia', 'score': 0},
-        {'text': 'Spain', 'score': 0},
+        {'text': 'Brazil', 'points': 1},
+        {'text': 'Argentina', 'points': 0},
+        {'text': 'Columbia', 'points': 0},
+        {'text': 'Spain', 'points': 0},
       ],
       'image': './images/flags/Brazil.png',
     },
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Columbia', 'score': 0},
-        {'text': 'Palestine', 'score': 0},
-        {'text': 'Ireland', 'score': 0},
-        {'text': 'Cuba', 'score': 1},
+        {'text': 'Columbia', 'points': 0},
+        {'text': 'Palestine', 'points': 0},
+        {'text': 'Ireland', 'points': 0},
+        {'text': 'Cuba', 'points': 1},
       ],
       'image': './images/flags/Cuba.png',
     },
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Poland', 'score': 0},
-        {'text': 'Finland', 'score': 0},
-        {'text': 'Argentina', 'score': 1},
-        {'text': 'England', 'score': 0},
+        {'text': 'Poland', 'points': 0},
+        {'text': 'Finland', 'points': 0},
+        {'text': 'Argentina', 'points': 1},
+        {'text': 'England', 'points': 0},
       ],
       'image': './images/flags/Argentina.png',
     },
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Mexico', 'score': 0},
-        {'text': 'Canada', 'score': 1},
-        {'text': 'Germany', 'score': 0},
-        {'text': 'Belgium', 'score': 0},
+        {'text': 'Mexico', 'points': 0},
+        {'text': 'Canada', 'points': 1},
+        {'text': 'Germany', 'points': 0},
+        {'text': 'Belgium', 'points': 0},
       ],
       'image': './images/flags/Canada.png',
     },
     {
       'question': 'What country does this flag represent?',
       'answers': [
-        {'text': 'Belgium', 'score': 0},
-        {'text': 'Netherlands', 'score': 0},
-        {'text': 'France', 'score': 1},
-        {'text': 'Italy', 'score': 0},
+        {'text': 'Belgium', 'points': 0},
+        {'text': 'Netherlands', 'points': 0},
+        {'text': 'France', 'points': 1},
+        {'text': 'Italy', 'points': 0},
       ],
       'image': './images/flags/France.png',
+    },
+    {
+      'question': 'What country does this flag represent?',
+      'answers': [
+        {'text': 'Belgium', 'points': 0},
+        {'text': 'Netherlands', 'points': 0},
+        {'text': 'France', 'points': 1},
+        {'text': 'Italy', 'points': 0},
+      ],
     },
   ];
 
   var _timeLeft = 108;
+  var _score = 0;
 
-  void _answerQuestion() {
+  void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 1) {
       _timeLeft = 108;
       setState(() {
-        if (_questionNum == 0) _startCountDown();
+        if (_questionNum == 0) {
+          _startCountDown();
+        }
+        _score += points;
         _questionNum++;
       });
     }
@@ -127,7 +140,7 @@ class QuizState extends State<Quiz> {
             // Circular Timer and Player Icon
             children: [
               CircularTimer(_timeLeft),
-              Header(_playerColor, _opponentColor),
+              Header(_playerColor, _opponentColor, _score),
             ],
           ),
           Question(_questions[_questionNum]['question'] as String), // Question
@@ -139,7 +152,7 @@ class QuizState extends State<Quiz> {
               Answers(
                 _questions[_questionNum]['answers']
                     as List<Map<String, Object>>,
-                _questions[_questionNum]['image'] as String,
+                _questions[_questionNum]['image'],
                 _answerQuestion,
               ),
               LinearTimer(_opponentColor, 100).padding(right: 10),

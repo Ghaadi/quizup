@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class Header extends StatelessWidget {
   final Color _playerColor;
   final Color _opponentColor;
+  final int _score;
 
-  const Header(this._playerColor, this._opponentColor);
+  const Header(this._playerColor, this._opponentColor, this._score);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class Header extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                     child: Text(
-                      '${0}',
+                      '$_score',
                       style: TextStyle(
                         fontSize: 26,
                         color: _playerColor,

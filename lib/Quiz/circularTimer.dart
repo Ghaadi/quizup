@@ -39,7 +39,8 @@ class CircularTimer extends StatelessWidget {
               child: Container(
                 decoration: const BoxDecoration(
                     // color: Colors.grey[400],
-                    color: Color(0xFFD6CFCB),
+                    // color: Color(0xFFD6CFCB), // Timberwolf
+                    color: Color(0xFFEDF4F5), // Ice White
                     shape: BoxShape.circle,
                 ),
               ),
