@@ -123,8 +123,10 @@ class QuizState extends State<Quiz> {
           _timeLeft--;
         });
       } else {
-        timer.cancel();
         _timeLeft = 108;
+        setState(() {
+          _answerQuestion(0);
+        });
       }
     });
   }

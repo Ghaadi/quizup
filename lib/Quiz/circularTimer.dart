@@ -26,10 +26,30 @@ class CircularTimer extends StatelessWidget {
                 color: _timerColor,
               ),
             ),
+            TweenAnimationBuilder(
+              tween: Tween(
+                begin: _timeLeft / 100 - 10,
+                end: _timeLeft / 100,
+              ),
+              duration: (_timeLeft > 100)
+                  ? const Duration(milliseconds: 0)
+                  : const Duration(milliseconds: 100),
+              builder: (context, time, _) => Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationY(math.pi),
+                child: CircularProgressIndicator(
+                  // value: _timeLeft / 100,
+                  value: time as double,
+                  strokeWidth: 12,
+                  color: _timerColor,
+                ),
+              ),
+            ),
             Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
               child: CircularProgressIndicator(
+                // value: _timeLeft / 100,
                 value: _timeLeft / 100,
                 strokeWidth: 12,
                 color: _timerColor,
@@ -38,19 +58,21 @@ class CircularTimer extends StatelessWidget {
             Center(
               child: Container(
                 decoration: const BoxDecoration(
-                    // color: Colors.grey[400],
-                    // color: Color(0xFFD6CFCB), // Timberwolf
-                    color: Color(0xFFEDF4F5), // Ice White
-                    shape: BoxShape.circle,
+                  // color: Colors.grey[400],
+                  // color: Color(0xFFD6CFCB), // Timberwolf
+                  color: Color(0xFFEDF4F5), // Ice White
+                  shape: BoxShape.circle,
                 ),
               ),
             ),
             Center(
               child: Text(
                 // '${(_timeLeft > 100) ? 10 : _timeLeft~/10}',
-                '${_timeLeft~/10}',
+                '${_timeLeft ~/ 10}',
                 style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             ),
           ],
