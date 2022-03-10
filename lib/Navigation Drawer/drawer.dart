@@ -24,7 +24,7 @@ class NavDrawer extends StatelessWidget {
                 child: Profile(_username, _title),
               ),
               const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 3), child: Divider(
-                color: Colors.black,
+                color: Colors.white,
               ),),
               const Option(
                 Icons.home_outlined,
