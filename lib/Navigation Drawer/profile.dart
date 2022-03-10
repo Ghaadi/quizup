@@ -8,16 +8,22 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        primary: Colors.grey,
+      ),
+      child: Row(
         children: [
           const Icon(
             Icons.account_circle,
-            size: 60,
+            color: Colors.blue,
+            size: 70,
           ),
           Stack(
-            children:  [
+            children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                padding: const EdgeInsets.fromLTRB(8, 7, 0, 0),
                 child: Text(
                   _username,
                   style: const TextStyle(
@@ -27,7 +33,7 @@ class Profile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                padding: const EdgeInsets.fromLTRB(8, 33, 0, 4),
                 child: Text(
                   _title,
                   style: const TextStyle(
@@ -40,6 +46,7 @@ class Profile extends StatelessWidget {
             ],
           ),
         ],
+      ),
     );
   }
 }
