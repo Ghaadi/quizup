@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 import './display.dart';
 
-int _displaynum = 0;
-final _display = const ['Logos', 'Flags', 'Computer science'];
-
 class Categories extends StatelessWidget {
-  final Color _backgroundColor = Color;
+  final Color _backgroundColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +14,13 @@ class Categories extends StatelessWidget {
       ),
       endDrawer: Drawer(),
       body: Column(children: [
-        Display(_display[0]),
+        Display(Icons.badge, "Logo", Colors.black),
+        Display(Icons.flag_rounded, "Flags", Colors.black),
+        Display(Icons.sports_basketball_outlined, "Sports", Colors.black),
+        Display(Icons.code, "Computer Science", Colors.black),
+        Display(Icons.temple_hindu_sharp, "History", Colors.black),
+        Display(Icons.biotech_outlined, "Biology", Colors.black),
+        Display(Icons.computer, "Tech", Colors.black),
       ]),
     );
   }

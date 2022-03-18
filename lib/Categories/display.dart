@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Display extends StatelessWidget {
-  final String _display;
-  final Color _answerColor = const Color(0xFFEDF4F5);
+  final IconData _icon;
+  final String _name;
+  final Color _iconColor;
 
-  const Display(this._display);
+  const Display(this._icon, this._name, this._iconColor);
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +14,23 @@ class Display extends StatelessWidget {
       height: 60,
       margin: const EdgeInsets.fromLTRB(10, 20, 0, 5),
       child: ElevatedButton(
-        onPressed: (null),
-        child: Text(
-          _display,
-          style: const TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
+        onPressed: () {},
+        child: Row(children: [
+          Icon(
+            _icon,
+            color: _iconColor,
+            size: 40,
           ),
-        ),
+          Text(
+            _name,
+            style: const TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ]),
         style: ElevatedButton.styleFrom(
-          primary: _answerColor,
+          primary: Colors.white,
           onPrimary: Colors.black,
         ),
       ),
