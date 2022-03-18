@@ -6,7 +6,7 @@ int _displaynum = 0;
 final _display = const ['Logos', 'Flags', 'Computer science'];
 
 class Categories extends StatelessWidget {
-  final Color _backgroundColor = Color.fromARGB(255, 34, 248, 41);
+  final Color _backgroundColor = Color;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
