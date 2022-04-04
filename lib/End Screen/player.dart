@@ -17,7 +17,7 @@ class Player extends StatelessWidget {
         Text(
           _username,
           style: const TextStyle(
-            color: Colors.white,
+            color: Color(0xFFEDF4F5),
             fontSize: 25,
           ),
         ),

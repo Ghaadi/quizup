@@ -3,26 +3,43 @@ import 'package:styled_widget/styled_widget.dart';
 import '../Navigation Drawer/drawer.dart';
 import './player.dart';
 import './points.dart';
+import './button.dart';
 
 class EndScreen extends StatelessWidget {
-  final Color _backgroundColor = const Color(0xFF2E3532);
+  // final Color _backgroundColor = const Color(0xFF2E3532);
+  // final Color _backgroundColor = Colors.black;
+  final Color _backgroundColor = const Color(0xFF212529);
+  final String _username = "Salim";
+  final String _score;
+
+  const EndScreen(this._score);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text(
-          "Flags",
+        backgroundColor: _backgroundColor,
+        elevation: 0,
+        toolbarHeight: 60,
+        title: Container(
+          margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: const Text(
+            "Flags",
+            style: TextStyle(fontSize: 26),
+          ),
+        ),
+        iconTheme: const IconThemeData(
+          size: 35,
+          color: Color(0xFFEDF4F5),
         ),
       ),
-      endDrawer: const NavDrawer("Salim"),
+      endDrawer: NavDrawer(_username),
       body: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.fromLTRB(0, 100, 0, 30),
+            margin: const EdgeInsets.fromLTRB(0, 60, 0, 30),
             child: const Text(
               "You Win!",
               style: TextStyle(fontSize: 50, color: Colors.white),
@@ -31,26 +48,28 @@ class EndScreen extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              Player("Salim", Icons.account_circle),
-              Player("Rawad", Icons.account_circle),
+            children: [
+              Player(_username, Icons.account_circle),
+              const Player("Rawad", Icons.account_circle),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Points("Match Score", Colors.blue, _backgroundColor, _score),
+              Points("Victory Bonus", Colors.green, _backgroundColor, "40"),
+              Points("Total\nXP", Colors.purple, _backgroundColor, "126"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              Points("Bonus"),
+              Button("Rematch"),
+              Button("Play Another"),
             ],
           ),
         ],
       ),
     );
   }
-}
-
-void main() {
-  runApp(
-    MaterialApp(
-      home: EndScreen(),
-    ),
-  );
 }

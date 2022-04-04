@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'dart:async';
 
+import '../End Screen/end.dart';
 import './answers.dart';
 import './question.dart';
 import './linearTimer.dart';
@@ -133,36 +134,39 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.grey[800],
-      backgroundColor: _backgroundColor, // Outer Space Crayola
-      body: Column(
-        children: [
-          Stack(
-            // Circular Timer and Player Icon
-            children: [
-              CircularTimer(_timeLeft),
-              Header(_playerColor, _opponentColor, _score),
-            ],
-          ),
-          Question(_questions[_questionNum]['question'] as String), // Question
-          Row(
-            // Answers between Timer Bars
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              LinearTimer(_playerColor, _timeLeft).padding(left: 10),
-              Answers(
-                _questions[_questionNum]['answers']
-                    as List<Map<String, Object>>,
-                _questions[_questionNum]['image'],
-                _answerQuestion,
-              ),
-              LinearTimer(_opponentColor, 100).padding(right: 10),
-            ],
-          ),
-        ],
-      ),
-    );
+    return (_questionNum < _questions.length - 1)
+        ? Scaffold(
+            // backgroundColor: Colors.grey[800],
+            backgroundColor: _backgroundColor, // Outer Space Crayola
+            body: Column(
+              children: [
+                Stack(
+                  // Circular Timer and Player Icon
+                  children: [
+                    CircularTimer(_timeLeft),
+                    Header(_playerColor, _opponentColor, _score),
+                  ],
+                ),
+                Question(
+                    _questions[_questionNum]['question'] as String), // Question
+                Row(
+                  // Answers between Timer Bars
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    LinearTimer(_playerColor, _timeLeft).padding(left: 10),
+                    Answers(
+                      _questions[_questionNum]['answers']
+                          as List<Map<String, Object>>,
+                      _questions[_questionNum]['image'],
+                      _answerQuestion,
+                    ),
+                    LinearTimer(_opponentColor, 100).padding(right: 10),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : EndScreen(_score.toString());
   }
 }
 
