@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
+
 import '../Navigation Drawer/drawer.dart';
 import './player.dart';
 import './points.dart';
@@ -7,7 +8,6 @@ import './button.dart';
 
 class EndScreen extends StatelessWidget {
   // final Color _backgroundColor = const Color(0xFF2E3532);
-  // final Color _backgroundColor = Colors.black;
   final Color _backgroundColor = const Color(0xFF212529);
   final String _username = "Salim";
   final String _score;
