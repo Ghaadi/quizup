@@ -11,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3), () => print("Ghady loute"));
+    Timer(const Duration(seconds: 3), () => print("Ghady loute"));
   }
 
   @override
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: const BoxDecoration(color: Colors.white),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       size: 150,
                     ),
                     Text(
-                      "QUIZ UP",
+                      "QUIZUP",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
