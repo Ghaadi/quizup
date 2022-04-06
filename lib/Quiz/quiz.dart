@@ -1,11 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'FireBaseFetch.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'dart:async';
 
+import '../End Screen/end.dart';
 import './answers.dart';
 import './question.dart';
 import './linearTimer.dart';
@@ -22,23 +19,9 @@ class QuizState extends State<Quiz> {
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
   int _questionNum = 0;
-  QuestionFetch s =
-      QuestionFetch("Categories/Categories/Category B: General Knowledge");
-
-  /* Future<void> getData() async {
-    final snapshot = await FirebaseDatabase.instance
-        .reference()
-        .child("Categories/Categories/Category A: Software Engineering")
-        .get();
-
-    final map = snapshot.value as Map<dynamic, dynamic>;
-
-    // Get data from docs and convert map to List
-  }
-*/
-  var questions = [
+  final _questions = const [
     {
-      'question': 'What country does this flag belong to',
+      'question': 'What country does this flag represent?',
       'answers': [
         {'text': 'England', 'points': 0},
         {'text': 'USA', 'points': 1},
@@ -122,7 +105,7 @@ class QuizState extends State<Quiz> {
   var _score = 0;
 
   void _answerQuestion(int points) {
-    if (_questionNum < questions.length - 1) {
+    if (_questionNum < _questions.length - 1) {
       _timeLeft = 108;
       setState(() {
         if (_questionNum == 0) {
@@ -151,36 +134,39 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    s.Format(questions);
-    return Scaffold(
-      // backgroundColor: Colors.grey[800],
-      backgroundColor: _backgroundColor, // Outer Space Crayola
-      body: Column(
-        children: [
-          Stack(
-            // Circular Timer and Player Icon
-            children: [
-              CircularTimer(_timeLeft),
-              Header(_playerColor, _opponentColor, _score),
-            ],
-          ),
-          Question(questions[_questionNum]['question'] as String), // Question
-          Row(
-            // Answers between Timer Bars
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              LinearTimer(_playerColor, _timeLeft).padding(left: 10),
-              Answers(
-                questions[_questionNum]['answers'] as List<Map<String, Object>>,
-                questions[_questionNum]['image'],
-                _answerQuestion,
-              ),
-              LinearTimer(_opponentColor, 100).padding(right: 10),
-            ],
-          ),
-        ],
-      ),
-    );
+    return (_questionNum < _questions.length - 1)
+        ? Scaffold(
+            // backgroundColor: Colors.grey[800],
+            backgroundColor: _backgroundColor, // Outer Space Crayola
+            body: Column(
+              children: [
+                Stack(
+                  // Circular Timer and Player Icon
+                  children: [
+                    CircularTimer(_timeLeft),
+                    Header(_playerColor, _opponentColor, _score),
+                  ],
+                ),
+                Question(
+                    _questions[_questionNum]['question'] as String), // Question
+                Row(
+                  // Answers between Timer Bars
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    LinearTimer(_playerColor, _timeLeft).padding(left: 10),
+                    Answers(
+                      _questions[_questionNum]['answers']
+                          as List<Map<String, Object>>,
+                      _questions[_questionNum]['image'],
+                      _answerQuestion,
+                    ),
+                    LinearTimer(_opponentColor, 100).padding(right: 10),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : EndScreen(_score.toString());
   }
 }
 
