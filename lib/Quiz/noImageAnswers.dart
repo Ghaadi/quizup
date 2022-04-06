@@ -12,8 +12,8 @@ class NoImageAnswers extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 330,
-          height: 80,
+          width: MediaQuery.of(context).size.width / 1.25,
+          height: MediaQuery.of(context).size.height / 8.54,
           margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
           child: ElevatedButton(
             onPressed: () => _answerQuestion(_answers[0]['points'] as int),
@@ -31,8 +31,8 @@ class NoImageAnswers extends StatelessWidget {
           ),
         ),
         Container(
-          width: 330,
-          height: 80,
+          width: MediaQuery.of(context).size.width / 1.25,
+          height: MediaQuery.of(context).size.height / 8.54,
           margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
           child: ElevatedButton(
             onPressed: () => _answerQuestion(_answers[1]['points'] as int),
@@ -50,8 +50,8 @@ class NoImageAnswers extends StatelessWidget {
           ),
         ),
         Container(
-          width: 330,
-          height: 80,
+          width: MediaQuery.of(context).size.width / 1.25,
+          height: MediaQuery.of(context).size.height / 8.54,
           margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
           child: ElevatedButton(
             onPressed: () => _answerQuestion(_answers[2]['points'] as int),
@@ -69,8 +69,8 @@ class NoImageAnswers extends StatelessWidget {
           ),
         ),
         Container(
-          width: 330,
-          height: 80,
+          width: MediaQuery.of(context).size.width / 1.25,
+          height: MediaQuery.of(context).size.height / 8.54,
           margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: ElevatedButton(
             onPressed: () => _answerQuestion(_answers[3]['points'] as int),

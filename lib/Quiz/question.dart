@@ -8,9 +8,15 @@ class Question extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 2 * MediaQuery.of(context).size.width / 3,
+      width: 2.2 * MediaQuery.of(context).size.width / 3,
       alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(0, 40, 0, 50),
+      // margin: const EdgeInsets.fromLTRB(0, 40, 0, 50),
+      margin: EdgeInsets.fromLTRB(
+        0,
+        MediaQuery.of(context).size.height / 17.1,
+        0,
+        MediaQuery.of(context).size.height / 13.67,
+      ),
       child: Text(
         _question,
         style: const TextStyle(
