@@ -1,5 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
 import 'LoginPage.dart';
@@ -70,17 +71,20 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  CollectionReference _collectionRef =
-      FirebaseFirestore.instance.collection('Questions');
-
+  static final Map<dynamic, dynamic> Category = {};
   Future<void> getData() async {
-    // Get docs from collection reference
-    QuerySnapshot querySnapshot = await _collectionRef.get();
+    final snapshot = await FirebaseDatabase.instance
+        .reference()
+        .child("Categories/Categories/Category A: Software Engineering/Q1")
+        .get();
+
+    final map = snapshot.value as Map<dynamic, dynamic>;
 
     // Get data from docs and convert map to List
-    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
 
-    print(allData);
+    Category.addAll(map);
+
+    print(Category);
   }
 
   final questions = const [
@@ -153,6 +157,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
