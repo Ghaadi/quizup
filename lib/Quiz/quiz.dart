@@ -1,4 +1,8 @@
+import 'package:flutter/foundation.dart';
+import 'FireBaseFetch.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'dart:async';
 
@@ -18,9 +22,23 @@ class QuizState extends State<Quiz> {
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
   int _questionNum = 0;
-  final _questions = const [
+  QuestionFetch s =
+      QuestionFetch("Categories/Categories/Category B: General Knowledge");
+
+  /* Future<void> getData() async {
+    final snapshot = await FirebaseDatabase.instance
+        .reference()
+        .child("Categories/Categories/Category A: Software Engineering")
+        .get();
+
+    final map = snapshot.value as Map<dynamic, dynamic>;
+
+    // Get data from docs and convert map to List
+  }
+*/
+  var questions = [
     {
-      'question': 'What country does this flag represent?',
+      'question': 'What country does this flag belong to',
       'answers': [
         {'text': 'England', 'points': 0},
         {'text': 'USA', 'points': 1},
@@ -104,7 +122,7 @@ class QuizState extends State<Quiz> {
   var _score = 0;
 
   void _answerQuestion(int points) {
-    if (_questionNum < _questions.length - 1) {
+    if (_questionNum < questions.length - 1) {
       _timeLeft = 108;
       setState(() {
         if (_questionNum == 0) {
@@ -133,6 +151,7 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    s.Format(questions);
     return Scaffold(
       // backgroundColor: Colors.grey[800],
       backgroundColor: _backgroundColor, // Outer Space Crayola
@@ -145,16 +164,15 @@ class QuizState extends State<Quiz> {
               Header(_playerColor, _opponentColor, _score),
             ],
           ),
-          Question(_questions[_questionNum]['question'] as String), // Question
+          Question(questions[_questionNum]['question'] as String), // Question
           Row(
             // Answers between Timer Bars
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               LinearTimer(_playerColor, _timeLeft).padding(left: 10),
               Answers(
-                _questions[_questionNum]['answers']
-                    as List<Map<String, Object>>,
-                _questions[_questionNum]['image'],
+                questions[_questionNum]['answers'] as List<Map<String, Object>>,
+                questions[_questionNum]['image'],
                 _answerQuestion,
               ),
               LinearTimer(_opponentColor, 100).padding(right: 10),
