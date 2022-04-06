@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quizup_prototype/Quiz/quiz.dart';
-import 'package:flutter/foundation.dart';
 
 import './Categories/categories.dart';
 
@@ -26,7 +25,8 @@ class _MyAppState extends State<MyApp> {
               },
             ),
           ),
-          if (_selectedCategory == "Flags") MaterialPage(child: Quiz()),
+          if (_selectedCategory != "")
+            MaterialPage(child: Quiz(_selectedCategory)),
         ],
         onPopPage: (route, result) {
           _selectedCategory = "";

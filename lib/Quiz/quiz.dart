@@ -10,6 +10,10 @@ import './header.dart';
 import './circularTimer.dart';
 
 class Quiz extends StatefulWidget {
+  final String categoryName;
+
+  const Quiz(this.categoryName, {Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => QuizState();
 }
@@ -103,8 +107,8 @@ class QuizState extends State<Quiz> {
   ];
 
   var _timeLeft = 108;
-  var _score = 0;
 
+  var _score = 0;
   void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 1) {
       _timeLeft = 108;
@@ -133,8 +137,11 @@ class QuizState extends State<Quiz> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+    final String _categoryName = widget.categoryName;
+
     return (_questionNum < _questions.length - 1)
         ? Scaffold(
             // backgroundColor: Colors.grey[800],
@@ -171,10 +178,10 @@ class QuizState extends State<Quiz> {
   }
 }
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Quiz(),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: Quiz(),
+//     ),
+//   );
+// }
