@@ -19,6 +19,7 @@ class QuizState extends State<Quiz> {
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
   int _questionNum = 0;
+
   final _questions = const [
     {
       'question': 'What country does this flag represent?',

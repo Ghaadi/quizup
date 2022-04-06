@@ -39,7 +39,7 @@ class EndScreen extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.fromLTRB(0, 60, 0, 30),
+            margin: const EdgeInsets.fromLTRB(0, 50, 0, 30),
             child: const Text(
               "You Win!",
               style: TextStyle(fontSize: 50, color: Colors.white),

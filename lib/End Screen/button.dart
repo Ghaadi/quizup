@@ -9,9 +9,9 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: MediaQuery.of(context).size.height / 11,
       width: MediaQuery.of(context).size.width / 2.2,
-      margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 65, 0, 0),
       child: ElevatedButton(
         onPressed: () {},
         child: Text(
@@ -21,7 +21,6 @@ class Button extends StatelessWidget {
             // color: Colors.yellow[900],
             fontSize: 18,
           ),
-          textAlign: TextAlign.start,
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(_color),

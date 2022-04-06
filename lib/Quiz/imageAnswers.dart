@@ -18,24 +18,27 @@ class ImageAnswers extends StatelessWidget {
     return Column(
       children: [
         Container(
+          width: MediaQuery.of(context).size.width / 1.21,
           margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
           child: Image.asset(
             _imgPath,
-            scale: 0.91,
+            fit: BoxFit.fill,
+            // scale: MediaQuery.of(context).size.width * MediaQuery.of(context).size.height / 308992.97,
+            // scale: 0.99,
           ),
         ),
         Row(
           children: [
             Container(
-              width: 160,
-              height: 90,
+              width: MediaQuery.of(context).size.width / 2.57,
+              height: MediaQuery.of(context).size.height / 7.59,
               margin: const EdgeInsets.fromLTRB(0, 10, 12, 10),
               child: ElevatedButton(
                 onPressed: () => _answerQuestion(_answers[0]['points'] as int),
                 child: Text(
                   _answers[0]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 23,
+                    fontSize: 19,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -46,15 +49,15 @@ class ImageAnswers extends StatelessWidget {
               ),
             ),
             Container(
-              width: 160,
-              height: 90,
+              width: MediaQuery.of(context).size.width / 2.57,
+              height: MediaQuery.of(context).size.height / 7.59,
               margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: ElevatedButton(
                 onPressed: () => _answerQuestion(_answers[1]['points'] as int),
                 child: Text(
                   _answers[1]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 23,
+                    fontSize: 19,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -69,15 +72,15 @@ class ImageAnswers extends StatelessWidget {
         Row(
           children: [
             Container(
-              width: 160,
-              height: 90,
+              width: MediaQuery.of(context).size.width / 2.57,
+              height: MediaQuery.of(context).size.height / 7.59,
               margin: const EdgeInsets.fromLTRB(0, 0, 12, 10),
               child: ElevatedButton(
                 onPressed: () => _answerQuestion(_answers[2]['points'] as int),
                 child: Text(
                   _answers[2]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 23,
+                    fontSize: 19,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -88,15 +91,15 @@ class ImageAnswers extends StatelessWidget {
               ),
             ),
             Container(
-              width: 160,
-              height: 90,
+              width: MediaQuery.of(context).size.width / 2.57,
+              height: MediaQuery.of(context).size.height / 7.59,
               margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: ElevatedButton(
                 onPressed: () => _answerQuestion(_answers[3]['points'] as int),
                 child: Text(
                   _answers[3]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 23,
+                    fontSize: 19,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

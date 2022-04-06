@@ -11,11 +11,11 @@ class Points extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
       child: Column(
         children: [
           Container(
-            width: 90,
+            width: MediaQuery.of(context).size.width / 4.57,
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 7),
             child: Text(
               _name,
@@ -30,16 +30,16 @@ class Points extends StatelessWidget {
             fit: StackFit.loose,
             children: [
               Container(
-                width: 90,
-                height: 50,
+                width: MediaQuery.of(context).size.width / 4.57,
+                height: MediaQuery.of(context).size.height / 13.67,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.0),
                   color: _color,
                 ),
               ),
               Container(
-                width: 85,
-                height: 45,
+                width: MediaQuery.of(context).size.width / 4.84,
+                height: MediaQuery.of(context).size.height / 15.19,
                 margin: const EdgeInsets.fromLTRB(2.5, 2.5, 0, 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.0),

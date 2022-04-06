@@ -10,8 +10,8 @@ class LinearTimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 15,
-      height: 400,
+      width: MediaQuery.of(context).size.width / 27.43,
+      height: MediaQuery.of(context).size.height / 1.71,
       child: FAProgressBar(
         currentValue: _timeLeft,
         progressColor: _playerColor,
