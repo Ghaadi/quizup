@@ -39,10 +39,5 @@ class _MyAppState extends State<MyApp> {
 }
 
 void main() {
-  if(kDebugMode){ // is Release Mode ??
-    print('release mode');
-  } else {
-    print('debug mode');
-  }
   runApp(MyApp());
 }
