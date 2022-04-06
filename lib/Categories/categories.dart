@@ -7,7 +7,8 @@ class Categories extends StatelessWidget {
   final Color _backgroundColor = Colors.green;
   final ValueChanged didSelectCategory;
 
-  const Categories({required this.didSelectCategory});
+  const Categories({Key? key, required this.didSelectCategory}) : super(key: key);
+  // const Categories({required this.didSelectCategory});
 
   @override
   Widget build(BuildContext context) {
