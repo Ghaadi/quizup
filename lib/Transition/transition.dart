@@ -55,6 +55,6 @@ class TransitionScreen extends StatelessWidget {
 
 void main() {
   runApp(
-    MaterialApp(home: TransitionScreen()),
+    const MaterialApp(home: TransitionScreen(), debugShowCheckedModeBanner: false,),
   );
 }

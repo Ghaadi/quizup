@@ -10,6 +10,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _selectedCategory = "";
+  bool _isRematch = false;
+  bool _didQuit = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,11 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
           if (_selectedCategory != "")
-            MaterialPage(child: Quiz(_selectedCategory)),
+            MaterialPage(child: Quiz(_selectedCategory))
+          else if(_isRematch)
+            MaterialPage(child: Quiz(_selectedCategory))
+          else if(_didQuit)
+            MaterialPage(child: Categories(didSelectCategory: (value) {  },)),
         ],
         onPopPage: (route, result) {
           _selectedCategory = "";
