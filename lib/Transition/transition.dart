@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class TransitionScreen extends StatelessWidget {
-  const TransitionScreen({Key? key}) : super(key: key);
+  final int _questionNum;
+
+  const TransitionScreen(this._questionNum);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class TransitionScreen extends StatelessWidget {
                               fadeInEnd: 0.4),
                         ]),
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-                          FadeAnimatedText('Round 1',
+                          FadeAnimatedText('Round $_questionNum',
                               duration: const Duration(seconds: 5),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
