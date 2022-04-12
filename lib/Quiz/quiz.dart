@@ -14,6 +14,7 @@ import './question.dart';
 import './linearTimer.dart';
 import './header.dart';
 import './circularTimer.dart';
+import '../Categories/categories.dart';
 
 class Quiz extends StatefulWidget {
   final String categoryName;
@@ -29,6 +30,8 @@ class QuizState extends State<Quiz> {
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
   int _questionNum = 0;
+  bool _countdownStarted = false;
+
 
   final _questions = const [
     {
@@ -112,19 +115,23 @@ class QuizState extends State<Quiz> {
     },
   ];
 
-  var _timeLeft = 108;
+  var _timeLeft = 106;
 
   var _score = 0;
+
   void _answerQuestion(int points) {
-    if (_questionNum < _questions.length - 1) {
+    if (_questionNum < _questions.length - 2) {
       _timeLeft = 108;
       setState(() {
-        if (_questionNum == 0) {
-          _startCountDown();
-        }
         _score += points;
         _questionNum++;
       });
+    } else if (_questionNum == _questions.length - 2) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (BuildContext context) => EndScreen(_score.toString()),
+            ),
+          );
     }
   }
 
@@ -143,44 +150,44 @@ class QuizState extends State<Quiz> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-    final String _categoryName = widget.categoryName;
-
-    return (_questionNum < _questions.length - 1)
-        ? Scaffold(
-            // backgroundColor: Colors.grey[800],
-            backgroundColor: _backgroundColor, // Outer Space Crayola
-            body: Column(
-              children: [
-                Stack(
-                  // Circular Timer and Player Icon
-                  children: [
-                    CircularTimer(_timeLeft),
-                    Header(_playerColor, _opponentColor, _score),
-                  ],
-                ),
-                Question(
-                    _questions[_questionNum]['question'] as String), // Question
-                Row(
-                  // Answers between Timer Bars
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    LinearTimer(_playerColor, _timeLeft).padding(left: 10),
-                    Answers(
-                      _questions[_questionNum]['answers']
-                          as List<Map<String, Object>>,
-                      _questions[_questionNum]['image'],
-                      _answerQuestion,
-                    ),
-                    LinearTimer(_opponentColor, 100).padding(right: 10),
-                  ],
-                ),
-              ],
-            ),
-          )
-        : EndScreen(_score.toString());
+    // return (_questionNum < _questions.length - 1)
+    if(!_countdownStarted) {
+      _startCountDown();
+      _countdownStarted = true;
+    }
+    return Scaffold(
+      // backgroundColor: Colors.grey[800],
+      backgroundColor: _backgroundColor, // Outer Space Crayola
+      body: Column(
+        children: [
+          Stack(
+            // Circular Timer and Player Icon
+            children: [
+              CircularTimer(_timeLeft),
+              Header(_playerColor, _opponentColor, _score),
+            ],
+          ),
+          Question(_questions[_questionNum]['question'] as String), // Question
+          Row(
+            // Answers between Timer Bars
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              LinearTimer(_playerColor, _timeLeft).padding(left: 10),
+              Answers(
+                _questions[_questionNum]['answers']
+                    as List<Map<String, Object>>,
+                _questions[_questionNum]['image'],
+                _answerQuestion,
+              ),
+              LinearTimer(_opponentColor, 100).padding(right: 10),
+            ],
+          ),
+        ],
+      ),
+    );
+    // : EndScreen(_score.toString());
   }
 }
 

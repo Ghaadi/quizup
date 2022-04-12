@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
-
 import '../Navigation Drawer/drawer.dart';
+
 import './player.dart';
 import './points.dart';
 import './button.dart';
+import '../Categories/categories.dart';
+import '../Quiz/quiz.dart';
 
 class EndScreen extends StatelessWidget {
   // final Color _backgroundColor = const Color(0xFF2E3532);
@@ -63,9 +65,22 @@ class EndScreen extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              Button("Rematch"),
-              Button("Play Another"),
+            children: [
+              Button(
+                "Rematch",
+                () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const Quiz("Flags"),
+                  ),
+                ),
+              ),
+              Button(
+                "Play Another",
+                () => Navigator.popUntil(
+                  context,
+                  ModalRoute.withName('/categories'),
+                ),
+              ),
             ],
           ),
         ],

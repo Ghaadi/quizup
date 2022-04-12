@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String _label;
   final Color _color = const Color(0xFFEDF4F5);
+  final Function() _buttonFunc;
 
-  const Button(this._label);
+  const Button(this._label, this._buttonFunc);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class Button extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2.2,
       margin: const EdgeInsets.fromLTRB(0, 65, 0, 0),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _buttonFunc,
         child: Text(
           _label,
           style: const TextStyle(

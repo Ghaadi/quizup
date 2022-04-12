@@ -26,19 +26,19 @@ class TransitionScreen extends StatelessWidget {
                       children: <Widget>[
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                           FadeAnimatedText('Flags',
-                              duration: Duration(seconds: 5),
+                              duration: const Duration(seconds: 5),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ]),
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                           FadeAnimatedText('Round 1',
-                              duration: Duration(seconds: 5),
+                              duration: const Duration(seconds: 5),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ]),
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                           FadeAnimatedText('Get Ready',
-                              duration: Duration(seconds: 5),
+                              duration: const Duration(seconds: 5),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ])

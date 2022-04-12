@@ -5,9 +5,7 @@ import '../Navigation Drawer/drawer.dart';
 
 class Categories extends StatelessWidget {
   final Color _backgroundColor = Colors.green;
-  final ValueChanged didSelectCategory;
 
-  const Categories({Key? key, required this.didSelectCategory}) : super(key: key);
   // const Categories({required this.didSelectCategory});
 
   @override
@@ -38,24 +36,16 @@ class Categories extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                child: Display(
-                    Icons.badge, "Logo", Colors.black, didSelectCategory),
+                child: const Display(Icons.badge, "Logo", Colors.black),
               ),
-              Display(
-                  Icons.flag_rounded, "Flags", Colors.black, didSelectCategory),
-              Display(Icons.sports_basketball_outlined, "Sports", Colors.black,
-                  didSelectCategory),
-              Display(Icons.code, "Computer Science", Colors.black,
-                  didSelectCategory),
-              Display(Icons.book_outlined, "History", Colors.black,
-                  didSelectCategory),
-              Display(Icons.biotech_outlined, "Biology", Colors.black,
-                  didSelectCategory),
-              Display(Icons.computer, "Tech", Colors.black, didSelectCategory),
-              Display(Icons.map_outlined, "Geography", Colors.black,
-                  didSelectCategory),
-              Display(
-                  Icons.music_note, "Music", Colors.black, didSelectCategory),
+              const Display(Icons.flag_rounded, "Flags", Colors.black),
+              const Display(Icons.sports_basketball_outlined, "Sports", Colors.black),
+              const Display(Icons.code, "Computer Science", Colors.black),
+              const Display(Icons.book_outlined, "History", Colors.black),
+              const Display(Icons.biotech_outlined, "Biology", Colors.black),
+              const Display(Icons.computer, "Tech", Colors.black),
+              const Display(Icons.map_outlined, "Geography", Colors.black),
+              const Display(Icons.music_note, "Music", Colors.black),
             ],
           ),
         ),
