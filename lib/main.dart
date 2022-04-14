@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizup_prototype/Quiz/quiz.dart';
+import 'package:quizup_prototype/Splash_Screen/screen.dart';
 
 import './Categories/categories.dart';
 
@@ -9,30 +10,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _selectedCategory = "";
+  // String _selectedCategory = "";
+  bool _isRematch = false;
+  bool _didQuit = false;
+
+  // void _selectCategory(String categoryName) {
+  //   _selectedCategory = categoryName;
+  //   Navigator.pushNamed(
+  //     context,
+  //     '/quiz',
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Navigator(
-        pages: [
-          MaterialPage(
-            child: Categories(
-              didSelectCategory: (category) {
-                setState(() {
-                  _selectedCategory = category;
-                });
-              },
-            ),
-          ),
-          if (_selectedCategory != "")
-            MaterialPage(child: Quiz(_selectedCategory)),
-        ],
-        onPopPage: (route, result) {
-          _selectedCategory = "";
-          return route.didPop(result);
-        },
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/categories': (context) => Categories(),
+        // '/quiz': (context) => Quiz(_selectedCategory),
+      },
       debugShowCheckedModeBanner: false,
     );
   }

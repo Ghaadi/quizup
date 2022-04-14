@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../Quiz/quiz.dart';
+
 class Display extends StatelessWidget {
   final IconData _icon;
-  final String _name;
+  final String _categoryName;
   final Color _iconColor;
-  final ValueChanged _didSelectCategory;
+  // final Function(String) _selectCategory;
 
   const Display(
-      this._icon, this._name, this._iconColor, this._didSelectCategory);
+    this._icon,
+    this._categoryName,
+    this._iconColor,
+    // this._selectCategory,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,12 @@ class Display extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 11.39,
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
-        onPressed: () => _didSelectCategory(_name),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const Quiz("Flags"),
+          ),
+        ),
         child: Row(
           children: [
             Container(
@@ -28,7 +39,7 @@ class Display extends StatelessWidget {
               ),
             ),
             Text(
-              _name,
+              _categoryName,
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
