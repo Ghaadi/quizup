@@ -17,7 +17,7 @@ final kLabelStyle = TextStyle(
 );
 
 final kBoxDecorationStyle = BoxDecoration(
-  color: Color(0xFF6CA8F1),
+  color: Color.fromARGB(255, 30, 34, 39),
   borderRadius: BorderRadius.circular(10.0),
   boxShadow: [
     BoxShadow(
@@ -28,12 +28,12 @@ final kBoxDecorationStyle = BoxDecoration(
   ],
 );
 
-class LoginScreen extends StatefulWidget {
+class SigninScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SigninScreen> createState() => _SigninScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SigninScreenState extends State<SigninScreen> {
   bool _rememberMe = false;
 
   Widget _buildEmailTF() {
@@ -112,14 +112,14 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => print('Sign In Button Pressed'),
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
         color: Colors.white,
         child: Text(
-          'LOGIN',
+          'SIGN IN',
           style: TextStyle(
             color: Color.fromARGB(255, 68, 70, 71),
             letterSpacing: 1.5,
@@ -182,13 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-            () => print('Login with Facebook'),
-            AssetImage(
-              './images/logos/facebook.jpeg',
-            ),
-          ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
+            () => print('Sign In with Google'),
             AssetImage(
               './images/logos/google.jpeg',
             ),
@@ -297,7 +291,7 @@ class _LoginScreenState extends State<LoginScreen> {
 void main() {
   runApp(
     MaterialApp(
-      home: LoginScreen(),
+      home: SigninScreen(),
     ),
   );
 }
