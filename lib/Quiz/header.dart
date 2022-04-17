@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Header extends StatelessWidget {
   final Color _playerColor;
   final Color _opponentColor;
-  final int _score;
+  final int _score1;
+  final int _score2;
 
-  const Header(this._playerColor, this._opponentColor, this._score);
+  const Header(
+      this._playerColor, this._opponentColor, this._score1, this._score2);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class Header extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                     child: Text(
-                      '$_score',
+                      '$_score1',
                       style: TextStyle(
                         fontSize: 26,
                         color: _playerColor,
@@ -64,15 +67,10 @@ class Header extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(46, 30, 0, 0),
-                    child: Text(
-                      '${0}',
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: _opponentColor,
-                      ),
-                    ),
-                  ),
+                      padding: const EdgeInsets.fromLTRB(46, 30, 0, 0),
+                      child: Text('$_score2',
+                          style:
+                              TextStyle(fontSize: 26, color: _opponentColor)))
                 ],
               ),
               const Icon(

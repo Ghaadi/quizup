@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ImageAnswers extends StatelessWidget {
   final Color _answerColor;
-  final List<Map<String, Object>> _answers;
+  final List<Map<String, dynamic>> _answers;
   final _imgPath;
   final Function(int) _answerQuestion;
 

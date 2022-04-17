@@ -40,15 +40,15 @@ class Categories extends StatelessWidget {
                 child: Display(
                     Icons.badge, "Logo", Colors.black, didSelectCategory),
               ),
-              Display(
-                  Icons.flag_rounded, "Flags", Colors.black, didSelectCategory),
+              Display(Icons.flag_rounded, "Lebanon", Colors.black,
+                  didSelectCategory),
               Display(Icons.sports_basketball_outlined, "Sports", Colors.black,
                   didSelectCategory),
               Display(Icons.code, "Computer Science", Colors.black,
                   didSelectCategory),
               Display(Icons.book_outlined, "History", Colors.black,
                   didSelectCategory),
-              Display(Icons.biotech_outlined, "Biology", Colors.black,
+              Display(Icons.biotech_outlined, "Aub info", Colors.black,
                   didSelectCategory),
               Display(Icons.computer, "Tech", Colors.black, didSelectCategory),
               Display(Icons.map_outlined, "Geography", Colors.black,

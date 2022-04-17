@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class NoImageAnswers extends StatelessWidget {
   final Color _answerColor;
-  final List<Map<String, Object>> _answers;
+  final List<Map<String, dynamic>> _answers;
   final Function(int) _answerQuestion;
 
   const NoImageAnswers(this._answers, this._answerQuestion, this._answerColor);

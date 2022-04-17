@@ -5,7 +5,7 @@ import 'package:quizup_prototype/Quiz/noImageAnswers.dart';
 class Answers extends StatelessWidget {
   // final Color _answerColor = const Color(0xFFD6CFCB); // Timberwolf
   final Color _answerColor = const Color(0xFFEDF4F5); // Ice White
-  final List<Map<String, Object>> _answers;
+  final List<Map<String, dynamic>> _answers;
   final _imgPath;
   final Function(int) _answerQuestion;
 

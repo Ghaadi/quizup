@@ -1,3 +1,4 @@
+import './playerData.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter/foundation.dart';
@@ -16,15 +17,48 @@ import './header.dart';
 import './circularTimer.dart';
 
 class Quiz extends StatefulWidget {
+  final String _category;
+
+  const Quiz(this._category);
   @override
   State<StatefulWidget> createState() => QuizState();
 }
 
 class QuizState extends State<Quiz> {
+  _categoryName() {
+    String category_name = widget._category;
+
+    return category_name;
+  }
+
+  late final String _category_name;
+  late Future _loader;
+  int _questionNum = 0;
+  List<Map<dynamic, dynamic>> questions1 = [{}];
+  @override
+  void initState() {
+    super.initState();
+    _category_name = _categoryName();
+    _loader = _fillList();
+  }
+
+  _challengerScore() async {
+    Player s = Player(2);
+
+    s.GetScore();
+  }
+
+  _fillList() async {
+    QuestionFetch q = QuestionFetch(_category_name);
+    List<Map<dynamic, dynamic>> question_return =
+        await q.getData(q.category_name);
+
+    questions1 = question_return;
+  }
+
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
-  int _questionNum = 0;
 
   final _questions = const [
     {
@@ -110,6 +144,8 @@ class QuizState extends State<Quiz> {
 
   var _timeLeft = 108;
   var _score = 0;
+  var _challenger_score = 0;
+  var s = Player(1);
 
   void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 1) {
@@ -141,46 +177,64 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    return (_questionNum < _questions.length - 1)
-        ? Scaffold(
-            // backgroundColor: Colors.grey[800],
-            backgroundColor: _backgroundColor, // Outer Space Crayola
-            body: Column(
-              children: [
-                Stack(
-                  // Circular Timer and Player Icon
-                  children: [
-                    CircularTimer(_timeLeft),
-                    Header(_playerColor, _opponentColor, _score),
-                  ],
-                ),
-                Question(
-                    _questions[_questionNum]['question'] as String), // Question
-                Row(
-                  // Answers between Timer Bars
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    LinearTimer(_playerColor, _timeLeft).padding(left: 10),
-                    Answers(
-                      _questions[_questionNum]['answers']
-                          as List<Map<String, Object>>,
-                      _questions[_questionNum]['image'],
-                      _answerQuestion,
+    return FutureBuilder(
+        future: _loader,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("questions being generated");
+          } else if (snapshot.connectionState == ConnectionState.none) {
+            return Text("Error");
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            return (_questionNum < _questions.length - 1)
+                ? Scaffold(
+                    // backgroundColor: Colors.grey[800],
+                    backgroundColor: _backgroundColor, // Outer Space Crayola
+                    body: Column(
+                      children: [
+                        Stack(
+                          // Circular Timer and Player Icon
+                          children: [
+                            CircularTimer(_timeLeft),
+                            Header(_playerColor, _opponentColor, _score,
+                                _challenger_score),
+                          ],
+                        ),
+                        Question(questions1[_questionNum]['question']
+                            as String), // Question
+                        Row(
+                          // Answers between Timer Bars
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            LinearTimer(_playerColor, _timeLeft)
+                                .padding(left: 10),
+                            Answers(
+                              questions1[_questionNum]['answers']
+                                  as List<Map<String, dynamic>>,
+                              questions1[_questionNum]['image'],
+                              _answerQuestion,
+                            ),
+                            LinearTimer(_opponentColor, 100).padding(right: 10),
+                          ],
+                        ),
+                      ],
                     ),
-                    LinearTimer(_opponentColor, 100).padding(right: 10),
-                  ],
-                ),
-              ],
-            ),
-          )
-        : EndScreen(_score.toString());
+                  )
+                : EndScreen(_score.toString());
+          }
+          if (snapshot.hasError) {
+            return Text("Error");
+          } else {
+            return Text("Please reload app");
+          }
+        });
   }
 }
 
-void main() {
+/*void main() {
   runApp(
     MaterialApp(
       home: Quiz(),
     ),
   );
 }
+*/

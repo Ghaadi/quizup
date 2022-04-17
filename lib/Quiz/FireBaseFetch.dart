@@ -2,127 +2,144 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class QuestionFetch {
-  Map<dynamic, dynamic> data = {};
+  Map<dynamic, dynamic> questions = {};
 
-  List<Map<String, Object>> questionList = [];
+  String category_name = '';
 
-  Future<void> getData(String path) async {
+  List<Map<String, dynamic>> questionList = [{}];
+
+  Future<List<Map<dynamic, dynamic>>> getData(String path) async {
+    List<Map<dynamic, dynamic>> fin_questions;
+
     final snapshot =
         await FirebaseDatabase.instance.reference().child(path).get();
 
     final map = snapshot.value as Map<dynamic, dynamic>;
 
-    data.addAll(map);
+    questions.addAll(map);
+
+    fin_questions = FormatData_Question(map);
+    return fin_questions;
   }
 
   QuestionFetch(String jsonPath) {
-    getData(jsonPath);
+    getData(category_path_parser(jsonPath));
+
+    category_name = category_path_parser(jsonPath);
   }
 
   Map<dynamic, dynamic> getQuestions() {
-    return data;
+    return questions;
   }
 
-  String test() {
-    return data["Q1"]["question"];
-  }
-
-  String test2() {
-    return data["Q2"]["question"];
-  }
-
-  void Format(List<Map<String, Object>> questionL) {
-    questionL[0]['question'] = this.test();
-    questionL[1]['question'] = this.test2();
-  }
-
-  List<Map<String, Object>> getQuestionList() {
+  List<Map<String, dynamic>> getQuestionList() {
     return questionList;
   }
 
-  void FormatData_Question() {
-    List<Map<String, Object>> questions = [
+  String category_path_parser(String name) {
+    switch (name) {
+      case "Computer Science":
+        return "Categories/Category A: Software Engineering";
+      case "Lebanon":
+        return "Categories/Category C: Lebanon";
+
+      case "History":
+        return "Categories/Category J: World History";
+
+      case "Aub info":
+        return "Categories/Category D: AUB info";
+
+      default:
+        return "";
+    }
+  }
+
+  List<Map<String, dynamic>> FormatData_Question(data) {
+    var questions = [
       {
         'question': data["Q1"]["question"],
         'answers': [
-          {'text': data["answers"][0], 'points': 0},
-          {'text': data["answers"][1], 'points': 1},
-          {'text': data["answers"][2], 'points': 0},
-          {'text': data["answers"][3], 'points': 0},
+          {'text': data["Q1"]["answers"][0], 'points': 0},
+          {'text': data["Q1"]["correct answer"], 'points': 1},
+          {'text': data["Q1"]["answers"][1], 'points': 0},
+          {'text': data["Q1"]["answers"][2], 'points': 0},
         ],
-        'image': './images/flags/USA.png',
+        'image': null,
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q2"]["question"],
         'answers': [
-          {'text': 'Syria', 'points': 0},
-          {'text': 'Brazil', 'points': 0},
-          {'text': 'Jordan', 'points': 0},
-          {'text': 'Lebanon', 'points': 1},
+          {'text': data["Q2"]["answers"][1], 'points': 0},
+          {'text': data["Q2"]["correct answer"], 'points': 1},
+          {'text': data["Q2"]["answers"][2], 'points': 0},
+          {'text': data["Q2"]["answers"][0], 'points': 0},
         ],
-        'image': './images/flags/Lebanon.png',
+        'image': null,
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q3"]["question"],
         'answers': [
-          {'text': 'Brazil', 'points': 1},
-          {'text': 'Argentina', 'points': 0},
-          {'text': 'Columbia', 'points': 0},
-          {'text': 'Spain', 'points': 0},
+          {'text': data["Q3"]["answers"][1], 'points': 0},
+          {'text': data["Q3"]["correct answer"], 'points': 1},
+          {'text': data["Q3"]["answers"][0], 'points': 0},
+          {'text': data["Q3"]["answers"][2], 'points': 0},
         ],
-        'image': './images/flags/Brazil.png',
+        'image': '',
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q4"]["question"],
         'answers': [
-          {'text': 'Columbia', 'points': 0},
-          {'text': 'Palestine', 'points': 0},
-          {'text': 'Ireland', 'points': 0},
-          {'text': 'Cuba', 'points': 1},
+          {'text': data["Q4"]["answers"][0], 'points': 0},
+          {'text': data["Q4"]["correct answer"], 'points': 1},
+          {'text': data["Q4"]["answers"][1], 'points': 0},
+          {'text': data["Q4"]["answers"][2], 'points': 0},
         ],
-        'image': './images/flags/Cuba.png',
+        'image': '',
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q5"]["question"],
         'answers': [
-          {'text': 'Poland', 'points': 0},
-          {'text': 'Finland', 'points': 0},
-          {'text': 'Argentina', 'points': 1},
-          {'text': 'England', 'points': 0},
+          {'text': data["Q5"]["answers"][2], 'points': 0},
+          {'text': data["Q5"]["correct answer"], 'points': 1},
+          {'text': data["Q5"]["answers"][1], 'points': 0},
+          {'text': data["Q5"]["answers"][0], 'points': 0},
         ],
-        'image': './images/flags/Argentina.png',
+        'image': null,
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q6"]["question"],
         'answers': [
-          {'text': 'Mexico', 'points': 0},
-          {'text': 'Canada', 'points': 1},
-          {'text': 'Germany', 'points': 0},
-          {'text': 'Belgium', 'points': 0},
+          {'text': data["Q6"]["answers"][2], 'points': 0},
+          {'text': data["Q6"]["correct answer"], 'points': 1},
+          {'text': data["Q6"]["answers"][1], 'points': 0},
+          {'text': data["Q6"]["answers"][0], 'points': 0},
         ],
-        'image': './images/flags/Canada.png',
+        'image': null,
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q7"]["question"],
         'answers': [
-          {'text': 'Belgium', 'points': 0},
-          {'text': 'Netherlands', 'points': 0},
-          {'text': 'France', 'points': 1},
-          {'text': 'Italy', 'points': 0},
+          {'text': data["Q7"]["answers"][2], 'points': 0},
+          {'text': data["Q7"]["correct answer"], 'points': 1},
+          {'text': data["Q7"]["answers"][1], 'points': 0},
+          {'text': data["Q7"]["answers"][0], 'points': 0},
         ],
-        'image': './images/flags/France.png',
+        'image': null,
       },
       {
-        'question': 'What country does this flag represent?',
+        'question': data["Q8"]["question"],
         'answers': [
-          {'text': 'Belgium', 'points': 0},
-          {'text': 'Netherlands', 'points': 0},
-          {'text': 'France', 'points': 1},
-          {'text': 'Italy', 'points': 0},
+          {'text': data["Q8"]["answers"][2], 'points': 0},
+          {'text': data["Q8"]["correct answer"], 'points': 1},
+          {'text': data["Q8"]["answers"][1], 'points': 0},
+          {'text': data["Q8"]["answers"][0], 'points': 0},
         ],
+        'image': null,
       },
     ];
 
     questionList = questions;
+
+    return questions;
   }
 }

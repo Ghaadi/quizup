@@ -26,7 +26,8 @@ class _MyAppState extends State<MyApp> {
               },
             ),
           ),
-          if (_selectedCategory == "Flags") MaterialPage(child: Quiz()),
+          if (_selectedCategory != '')
+            MaterialPage(child: Quiz(_selectedCategory)),
         ],
         onPopPage: (route, result) {
           _selectedCategory = "";
