@@ -15,6 +15,7 @@ import './question.dart';
 import './linearTimer.dart';
 import './header.dart';
 import './circularTimer.dart';
+import '../Categories/categories.dart';
 
 class Quiz extends StatefulWidget {
   final String _category;
@@ -59,6 +60,8 @@ class QuizState extends State<Quiz> {
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
+
+  bool _countdownStarted = false;
 
   final _questions = const [
     {
@@ -142,21 +145,25 @@ class QuizState extends State<Quiz> {
     },
   ];
 
-  var _timeLeft = 108;
+  var _timeLeft = 106;
+
   var _score = 0;
   var _challenger_score = 0;
   var s = Player(1);
 
   void _answerQuestion(int points) {
-    if (_questionNum < _questions.length - 1) {
+    if (_questionNum < _questions.length - 2) {
       _timeLeft = 108;
       setState(() {
-        if (_questionNum == 0) {
-          _startCountDown();
-        }
         _score += points;
         _questionNum++;
       });
+    } else if (_questionNum == _questions.length - 2) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (BuildContext context) => EndScreen(_score.toString()),
+        ),
+      );
     }
   }
 
