@@ -10,7 +10,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _selectedCategory = "";
+  String _selectedCategory = "Lebanon";
   bool _isRematch = false;
   bool _didQuit = false;
 
@@ -36,6 +36,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-void main() {
+void main() async {
   runApp(MyApp());
 }

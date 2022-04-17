@@ -41,7 +41,7 @@ class QuestionFetch {
       case "Computer Science":
         return "Categories/Category A: Software Engineering";
       case "Lebanon":
-        return "Categories/Category C: Lebanon";
+        return "/Categories/Category C: Lebanon";
 
       case "History":
         return "Categories/Category J: World History";

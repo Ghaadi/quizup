@@ -240,8 +240,7 @@ class QuizState extends State<Quiz> {
 /*void main() {
   runApp(
     MaterialApp(
-      home: Quiz(),
+      home: Quiz("Lebanon"),
     ),
   );
-}
-*/
+}*/
