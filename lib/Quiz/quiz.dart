@@ -43,11 +43,7 @@ class QuizState extends State<Quiz> {
     _loader = _fillList();
   }
 
-  _challengerScore() async {
-    Player s = Player(2);
-
-    s.GetScore();
-  }
+  _challengerScore() async {}
 
   _fillList() async {
     QuestionFetch q = QuestionFetch(_category_name);
@@ -148,8 +144,8 @@ class QuizState extends State<Quiz> {
   var _timeLeft = 106;
 
   var _score = 0;
-  var _challenger_score = 0;
-  var s = Player(1);
+  var challenger_score = 0;
+  var s = Player(0, 'Salim');
 
   void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 2) {
@@ -184,11 +180,14 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    s.SendScore(_score, "Salim");
+    s.GetOpponentScore(_score, challenger_score, 'rawad');
+    challenger_score = s.getCount();
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("questions being generated");
+            return CircularProgressIndicator();
           } else if (snapshot.connectionState == ConnectionState.none) {
             return Text("Error");
           } else if (snapshot.connectionState == ConnectionState.done) {
@@ -203,7 +202,7 @@ class QuizState extends State<Quiz> {
                           children: [
                             CircularTimer(_timeLeft),
                             Header(_playerColor, _opponentColor, _score,
-                                _challenger_score),
+                                challenger_score),
                           ],
                         ),
                         Question(questions1[_questionNum]['question']
@@ -227,9 +226,6 @@ class QuizState extends State<Quiz> {
                     ),
                   )
                 : EndScreen(_score.toString());
-          }
-          if (snapshot.hasError) {
-            return Text("Error");
           } else {
             return Text("Please reload app");
           }
