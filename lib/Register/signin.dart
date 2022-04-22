@@ -41,15 +41,37 @@ class _SigninScreenState extends State<SigninScreen> {
   final passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    detectUser();
+  }
+
+  void detectUser() async {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        //Navigator.pushNamed(context, '/categories');
+      } else {
+        print(user.email);
+      }
+    });
+  }
+
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+
+    super.dispose();
   }
 
   Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim());
+  }
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   bool _rememberMe = false;
@@ -132,7 +154,7 @@ class _SigninScreenState extends State<SigninScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Sign In Button Pressed'),
+        onPressed: signIn,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -214,7 +236,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => print('Sign Up Button Pressed'),
+      onTap: () => Navigator.pushNamed(context, '/signUp'),
       child: RichText(
         text: TextSpan(
           children: [

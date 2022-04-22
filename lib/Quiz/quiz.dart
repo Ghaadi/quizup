@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'FireBaseFetch.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'dart:async';
 
@@ -36,6 +34,8 @@ class QuizState extends State<Quiz> {
   late Future _loader;
   int _questionNum = 0;
   List<Map<dynamic, dynamic>> questions1 = [{}];
+
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   void initState() {
     super.initState();
@@ -46,7 +46,7 @@ class QuizState extends State<Quiz> {
   _challengerScore() async {}
 
   _fillList() async {
-    QuestionFetch q = QuestionFetch(_category_name);
+    QuestionFetch q = QuestionFetch(_category_name, user.uid);
     List<Map<dynamic, dynamic>> question_return =
         await q.getData(q.category_name);
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import '../Categories/categories.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,22 +10,25 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  void isLoggedIn() async {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        Navigator.pushNamed(context, '/signIn');
+      } else {
+        Navigator.pushNamed(context, '/categories');
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    // Timer(const Duration(seconds: 3), () => print("Ghady loute"));
-    Timer(
-      const Duration(seconds: 3),
-          () => Navigator.pushNamed(
-        context,
-        '/categories',
-      ),
-    );
+
+    Timer(const Duration(seconds: 3), isLoggedIn);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,

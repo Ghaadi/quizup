@@ -2,6 +2,8 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 late final Void Function()? onTap;
 
@@ -28,13 +30,63 @@ final kBoxDecorationStyle = BoxDecoration(
   ],
 );
 
-class SigninScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  State<SigninScreen> createState() => _SigninScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SigninScreenState extends State<SigninScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
+  @override
+  void initState() {
+    super.initState();
+    detectUser();
+  }
+
   bool _rememberMe = false;
+  final username = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  Future signUp() async {
+    final _savedUserName = username.text.trim();
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print("no username");
+      } else {
+        FirebaseDatabase.instance.reference().child("/users").update({
+          user.uid: {'username': _savedUserName}
+        });
+      }
+    });
+    detectUser();
+  }
+
+  void detectUser() async {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        //Navigator.pushNamed(context, '/categories');
+      } else {
+        Navigator.pushNamed(context, '/categories');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    username.dispose();
+
+    super.dispose();
+  }
 
   Widget _buildUserTF() {
     return Column(
@@ -50,6 +102,7 @@ class _SigninScreenState extends State<SigninScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: username,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -85,6 +138,7 @@ class _SigninScreenState extends State<SigninScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -120,6 +174,7 @@ class _SigninScreenState extends State<SigninScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: passwordController,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -147,7 +202,7 @@ class _SigninScreenState extends State<SigninScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Sign Up Button Pressed'),
+        onPressed: signUp,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -237,10 +292,10 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 }
 
-void main() {
+/*void main() {
   runApp(
     MaterialApp(
       home: SigninScreen(),
     ),
   );
-}
+}*/

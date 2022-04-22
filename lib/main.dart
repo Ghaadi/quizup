@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import './Register/signin.dart';
+import './Register/signup.dart';
 import 'package:quizup_prototype/Quiz/quiz.dart';
 import 'package:quizup_prototype/Splash_Screen/screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import './Categories/categories.dart';
 
@@ -28,8 +31,10 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
+        '/signIn': (context) => SigninScreen(),
         '/categories': (context) => Categories(),
         '/quiz': (context) => Quiz(_selectedCategory),
+        '/signUp': (context) => SignUpScreen()
       },
       debugShowCheckedModeBanner: false,
     );
@@ -37,5 +42,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }

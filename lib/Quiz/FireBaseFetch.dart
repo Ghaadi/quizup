@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class QuestionFetch {
+  String username = '';
   Map<dynamic, dynamic> questions = {};
-
   String category_name = '';
-
   List<Map<String, dynamic>> questionList = [{}];
 
   Future<List<Map<dynamic, dynamic>>> getData(String path) async {
@@ -22,9 +23,10 @@ class QuestionFetch {
     return fin_questions;
   }
 
-  QuestionFetch(String jsonPath) {
+  QuestionFetch(String jsonPath, String Uid) {
     getData(category_path_parser(jsonPath));
 
+    getUsername(Uid);
     category_name = category_path_parser(jsonPath);
   }
 
@@ -32,8 +34,25 @@ class QuestionFetch {
     return questions;
   }
 
+  Future<String> getUsername(String Uid) async {
+    final snapshot = await FirebaseDatabase.instance
+        .reference()
+        .child('users/$Uid/username')
+        .get();
+
+    final username1 = snapshot.value as String;
+
+    username = username1;
+
+    return username;
+  }
+
   List<Map<String, dynamic>> getQuestionList() {
     return questionList;
+  }
+
+  String getUser() {
+    return username;
   }
 
   String category_path_parser(String name) {
