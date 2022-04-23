@@ -62,6 +62,26 @@ class NavDrawer extends StatelessWidget {
               "Settings",
               Colors.grey,
             ),
+            SizedBox(height: 25),
+            ElevatedButton(
+              onPressed: null,
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Text(
+                  "Sign Out",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                color: Colors.red,
+                width: double.infinity,
+                height: 65,
+                alignment: Alignment.center,
+              ),
+            )
           ],
         ),
       ),
