@@ -144,13 +144,14 @@ class QuizState extends State<Quiz> {
   var _timeLeft = 106;
 
   var _score = 0;
-  var challenger_score = 0;
+  var challenGerScore = 0;
   var s = Player(0, 'Salim');
 
   void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 2) {
       _timeLeft = 108;
       setState(() {
+        setOpponentScore();
         _score += points;
         _questionNum++;
       });
@@ -161,6 +162,14 @@ class QuizState extends State<Quiz> {
         ),
       );
     }
+  }
+
+  void setOpponentScore() {
+    s.SendScore(_score, "rawad");
+    s.GetOpponentScore(_score, challenGerScore, 'rawad');
+    setState(() {
+      challenGerScore = s.getCount();
+    });
   }
 
   void _startCountDown() {
@@ -180,9 +189,6 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    s.SendScore(_score, "Salim");
-    s.GetOpponentScore(_score, challenger_score, 'rawad');
-    challenger_score = s.getCount();
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -202,7 +208,7 @@ class QuizState extends State<Quiz> {
                           children: [
                             CircularTimer(_timeLeft),
                             Header(_playerColor, _opponentColor, _score,
-                                challenger_score),
+                                challenGerScore),
                           ],
                         ),
                         Question(questions1[_questionNum]['question']
