@@ -8,12 +8,14 @@ import '../Quiz/quiz.dart';
 class TransitionScreen extends StatelessWidget {
   final int _questionNum, _score, _challengerScore;
   final String _category;
+  final String _username;
 
   const TransitionScreen(
     this._category,
     this._questionNum,
     this._score,
     this._challengerScore,
+    this._username,
   );
 
   @override
@@ -25,6 +27,7 @@ class TransitionScreen extends StatelessWidget {
           builder: (_) => Quiz(
             _category,
             _questionNum,
+            _username,
             _score,
             _challengerScore,
           ),

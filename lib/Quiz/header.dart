@@ -12,12 +12,12 @@ class Header extends StatelessWidget {
 
   final dbRef = FirebaseDatabase.instance
       .reference()
-      .child('/Games/games2/players/rawad/total score');
+      .child('/Games/games2/players/Rawad/total score');
 
   void getScore() async {
     final dbRef1 = await FirebaseDatabase.instance
         .reference()
-        .child('/Games/games2/players/rawad/total score')
+        .child('/Games/games2/players/Rawad/total score')
         .get();
 
     final score = dbRef1.value as int;

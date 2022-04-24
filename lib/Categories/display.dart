@@ -29,7 +29,7 @@ class Display extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (BuildContext context) =>
-                TransitionScreen(_categoryName, 1, 0, 0),
+                TransitionScreen(_categoryName, 1, 0, 0, username),
           ),
         ),
         child: Row(

@@ -165,14 +165,15 @@ class QuizState extends State<Quiz> {
             _questionNum + 2,
             _score,
             _challengerScore,
+            widget.username,
           ),
         ),
       );
     } else if (_questionNum == _questions.length - 2) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) =>
-              EndScreen(_categoryName, (_score + points).toString()),
+          builder: (BuildContext context) => EndScreen(_score.toString(),
+              widget.username, widget._category, _score, _challengerScore),
         ),
       );
     }

@@ -22,17 +22,14 @@ class EndScreen extends StatelessWidget {
 
   String winner(myScore, opponetScore) {
     var result = "";
-    final winner = myScore > opponetScore;
 
-    switch (winner) {
-      case true:
-        result = "you WIN!";
-        break;
-      case false:
-        result = "you LOST!";
-        break;
-      default:
-        result = 'its a tie';
+    if (myScore > opponentScore) {
+      result = "YOU WON!!";
+    } else if (myScore < opponentScore) {
+      result = "YOU LOST :(";
+    }
+    if (myScore == opponentScore) {
+      result = "NO ONE WON :)";
     }
     return result;
   }
