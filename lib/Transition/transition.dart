@@ -1,13 +1,37 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-class TransitionScreen extends StatelessWidget {
-  final int _questionNum;
+import '../Quiz/quiz.dart';
 
-  const TransitionScreen(this._questionNum);
+class TransitionScreen extends StatelessWidget {
+  final int _questionNum, _score, _challengerScore;
+  final String _category;
+
+  const TransitionScreen(
+    this._category,
+    this._questionNum,
+    this._score,
+    this._challengerScore,
+  );
 
   @override
   Widget build(BuildContext context) {
+    Timer(const Duration(seconds: 2), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => Quiz(
+            _category,
+            _questionNum,
+            _score,
+            _challengerScore,
+          ),
+        ),
+      );
+    });
+
     return Scaffold(
       backgroundColor: const Color(0xFF2E3532),
       body: Stack(
@@ -27,23 +51,17 @@ class TransitionScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-                          FadeAnimatedText('Flags',
-                              duration: const Duration(seconds: 5),
+                          FadeAnimatedText(_category,
+                              duration: const Duration(seconds: 2),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ]),
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                           FadeAnimatedText('Round $_questionNum',
-                              duration: const Duration(seconds: 5),
+                              duration: const Duration(seconds: 2),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ]),
-                        AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-                          FadeAnimatedText('Get Ready',
-                              duration: const Duration(seconds: 5),
-                              fadeOutBegin: 0.9,
-                              fadeInEnd: 0.4),
-                        ])
                       ],
                     ),
                   ))
@@ -53,10 +71,4 @@ class TransitionScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(
-    const MaterialApp(home: TransitionScreen(1), debugShowCheckedModeBanner: false,),
-  );
 }

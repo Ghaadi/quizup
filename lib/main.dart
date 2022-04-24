@@ -33,7 +33,6 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => SplashScreen(),
         '/signIn': (context) => SigninScreen(),
         '/categories': (context) => Categories(),
-        '/quiz': (context) => Quiz(_selectedCategory),
         '/signUp': (context) => SignUpScreen()
       },
       debugShowCheckedModeBanner: false,

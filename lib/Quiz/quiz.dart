@@ -14,43 +14,43 @@ import './linearTimer.dart';
 import './header.dart';
 import './circularTimer.dart';
 import '../Categories/categories.dart';
+import '../Transition/transition.dart';
 
 class Quiz extends StatefulWidget {
+  final int _questionNum, _score, _challengerScore;
   final String _category;
 
-  const Quiz(this._category);
+  const Quiz(
+      this._category, this._questionNum, this._score, this._challengerScore);
+
   @override
   State<StatefulWidget> createState() => QuizState();
 }
 
 class QuizState extends State<Quiz> {
-  _categoryName() {
-    String category_name = widget._category;
-
-    return category_name;
-  }
-
-  late final String _category_name;
+  late final String _categoryName;
   late Future _loader;
-  int _questionNum = 0;
+  late int _questionNum, _score, _challengerScore;
   List<Map<dynamic, dynamic>> questions1 = [{}];
 
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   void initState() {
     super.initState();
-    _category_name = _categoryName();
+    _categoryName = widget._category;
+    _questionNum = widget._questionNum - 1;
+    _score = widget._score;
+    _challengerScore = widget._challengerScore;
     _loader = _fillList();
   }
 
-  _challengerScore() async {}
-
   _fillList() async {
-    QuestionFetch q = QuestionFetch(_category_name, user.uid);
-    List<Map<dynamic, dynamic>> question_return =
+    QuestionFetch q = QuestionFetch(_categoryName, user.uid);
+    List<Map<dynamic, dynamic>> questionReturn =
         await q.getData(q.category_name);
 
-    questions1 = question_return;
+    questions1 = questionReturn;
   }
 
   final Color _playerColor = Colors.red;
@@ -143,8 +143,6 @@ class QuizState extends State<Quiz> {
 
   var _timeLeft = 106;
 
-  var _score = 0;
-  var challenger_score = 0;
   var s = Player(0, 'Salim');
 
   void _answerQuestion(int points) {
@@ -152,12 +150,24 @@ class QuizState extends State<Quiz> {
       _timeLeft = 108;
       setState(() {
         _score += points;
-        _questionNum++;
+        // _questionNum++;
       });
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TransitionScreen(
+            _categoryName,
+            _questionNum + 2,
+            _score,
+            _challengerScore,
+          ),
+        ),
+      );
     } else if (_questionNum == _questions.length - 2) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) => EndScreen(_score.toString()),
+          builder: (BuildContext context) =>
+              EndScreen(_categoryName, (_score + points).toString()),
         ),
       );
     }
@@ -181,18 +191,17 @@ class QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     s.SendScore(_score, "Salim");
-    s.GetOpponentScore(_score, challenger_score, 'rawad');
-    challenger_score = s.getCount();
+    s.GetOpponentScore(_score, _challengerScore, 'Rawad');
+    _challengerScore = s.getCount();
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else if (snapshot.connectionState == ConnectionState.none) {
-            return Text("Error");
+            return const Text("Error");
           } else if (snapshot.connectionState == ConnectionState.done) {
-            return (_questionNum < _questions.length - 1)
-                ? Scaffold(
+            return Scaffold(
                     // backgroundColor: Colors.grey[800],
                     backgroundColor: _backgroundColor, // Outer Space Crayola
                     body: Column(
@@ -202,7 +211,7 @@ class QuizState extends State<Quiz> {
                           children: [
                             CircularTimer(_timeLeft),
                             Header(_playerColor, _opponentColor, _score,
-                                challenger_score),
+                                _challengerScore),
                           ],
                         ),
                         Question(questions1[_questionNum]['question']
@@ -224,10 +233,9 @@ class QuizState extends State<Quiz> {
                         ),
                       ],
                     ),
-                  )
-                : EndScreen(_score.toString());
+                  );
           } else {
-            return Text("Please reload app");
+            return const Text("Please reload app");
           }
         });
   }

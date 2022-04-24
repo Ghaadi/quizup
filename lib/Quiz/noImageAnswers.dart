@@ -23,6 +23,7 @@ class NoImageAnswers extends StatelessWidget {
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             style: ElevatedButton.styleFrom(
               primary: _answerColor,
@@ -42,6 +43,7 @@ class NoImageAnswers extends StatelessWidget {
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             style: ElevatedButton.styleFrom(
               primary: _answerColor,
@@ -61,6 +63,7 @@ class NoImageAnswers extends StatelessWidget {
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             style: ElevatedButton.styleFrom(
               primary: _answerColor,
@@ -80,6 +83,7 @@ class NoImageAnswers extends StatelessWidget {
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             style: ElevatedButton.styleFrom(
               primary: _answerColor,

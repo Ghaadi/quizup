@@ -38,9 +38,10 @@ class ImageAnswers extends StatelessWidget {
                 child: Text(
                   _answers[0]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: _answerColor,
@@ -57,9 +58,10 @@ class ImageAnswers extends StatelessWidget {
                 child: Text(
                   _answers[1]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: _answerColor,
@@ -80,9 +82,10 @@ class ImageAnswers extends StatelessWidget {
                 child: Text(
                   _answers[2]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: _answerColor,
@@ -99,9 +102,10 @@ class ImageAnswers extends StatelessWidget {
                 child: Text(
                   _answers[3]['text'] as String,
                   style: const TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: _answerColor,

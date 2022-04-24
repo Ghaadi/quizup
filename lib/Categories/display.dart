@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Transition/transition.dart';
 
 import '../Quiz/quiz.dart';
 
@@ -22,10 +23,10 @@ class Display extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 11.39,
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
-        onPressed: () => Navigator.push(
+        onPressed: () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => Quiz(_categoryName),
+            builder: (BuildContext context) => TransitionScreen(_categoryName, 1, 0, 0),
           ),
         ),
         child: Row(

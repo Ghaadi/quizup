@@ -12,9 +12,9 @@ class EndScreen extends StatelessWidget {
   // final Color _backgroundColor = const Color(0xFF2E3532);
   final Color _backgroundColor = const Color(0xFF212529);
   final String _username = "Salim";
-  final String _score;
+  final String _score, _categoryName;
 
-  const EndScreen(this._score);
+  const EndScreen(this._categoryName, this._score);
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +70,16 @@ class EndScreen extends StatelessWidget {
                 "Rematch",
                 () => Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => const Quiz("Flags"),
+                    builder: (BuildContext context) =>
+                        Quiz(_categoryName, 1, 0, 0),
                   ),
                 ),
               ),
               Button(
                 "Play Another",
-                () => Navigator.popUntil(
+                () => Navigator.pushReplacementNamed(
                   context,
-                  ModalRoute.withName('/categories'),
+                  '/categories',
                 ),
               ),
             ],
