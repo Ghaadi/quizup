@@ -5,14 +5,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class Player {
-  int _Score = 0;
-
+  int score;
+  late int opponent_score;
   String username;
 
-  Player(this._Score, this.username);
+  Player(this.score, this.username);
 
   int getCount() {
-    return _Score;
+    return score;
   }
 
   void createGame(myName, opponent_name) {
@@ -26,15 +26,15 @@ class Player {
     });
   }
 
-  Future<int> GetScore(Score, name) async {
+  Future<int> GetScore(score1, name) async {
     final snapshot = await FirebaseDatabase.instance
         .reference()
         .child('/Games/games2/players/$name/total score')
         .get();
     final counter = snapshot.value as int;
-    _Score = counter;
-    Score = counter;
-    return Score;
+    score = counter;
+    score1 = counter;
+    return score1;
   }
 
   Future<void> SendScore(int a, name) async {

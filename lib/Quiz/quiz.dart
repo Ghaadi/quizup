@@ -46,12 +46,18 @@ class QuizState extends State<Quiz> {
   }
 
   _fillList() async {
+    var s = Player(_challengerScore, 'Salim');
+    s.GetScore(_challengerScore, 'Rawad');
     QuestionFetch q = QuestionFetch(_categoryName, user.uid);
     List<Map<dynamic, dynamic>> questionReturn =
         await q.getData(q.category_name);
 
     questions1 = questionReturn;
+
+    _challengerScore = s.getCount();
   }
+
+  var s = Player(0, 'Salim');
 
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
@@ -143,8 +149,6 @@ class QuizState extends State<Quiz> {
 
   var _timeLeft = 106;
 
-  var s = Player(0, 'Salim');
-
   void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 2) {
       _timeLeft = 108;
@@ -190,9 +194,6 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    s.SendScore(_score, "Salim");
-    s.GetOpponentScore(_score, _challengerScore, 'Rawad');
-    _challengerScore = s.getCount();
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -202,38 +203,37 @@ class QuizState extends State<Quiz> {
             return const Text("Error");
           } else if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
-                    // backgroundColor: Colors.grey[800],
-                    backgroundColor: _backgroundColor, // Outer Space Crayola
-                    body: Column(
-                      children: [
-                        Stack(
-                          // Circular Timer and Player Icon
-                          children: [
-                            CircularTimer(_timeLeft),
-                            Header(_playerColor, _opponentColor, _score,
-                                _challengerScore),
-                          ],
-                        ),
-                        Question(questions1[_questionNum]['question']
-                            as String), // Question
-                        Row(
-                          // Answers between Timer Bars
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            LinearTimer(_playerColor, _timeLeft)
-                                .padding(left: 10),
-                            Answers(
-                              questions1[_questionNum]['answers']
-                                  as List<Map<String, dynamic>>,
-                              questions1[_questionNum]['image'],
-                              _answerQuestion,
-                            ),
-                            LinearTimer(_opponentColor, 100).padding(right: 10),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
+              // backgroundColor: Colors.grey[800],
+              backgroundColor: _backgroundColor, // Outer Space Crayola
+              body: Column(
+                children: [
+                  Stack(
+                    // Circular Timer and Player Icon
+                    children: [
+                      CircularTimer(_timeLeft),
+                      Header(_playerColor, _opponentColor, _score,
+                          _challengerScore),
+                    ],
+                  ),
+                  Question(questions1[_questionNum]['question']
+                      as String), // Question
+                  Row(
+                    // Answers between Timer Bars
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      LinearTimer(_playerColor, _timeLeft).padding(left: 10),
+                      Answers(
+                        questions1[_questionNum]['answers']
+                            as List<Map<String, dynamic>>,
+                        questions1[_questionNum]['image'],
+                        _answerQuestion,
+                      ),
+                      LinearTimer(_opponentColor, 100).padding(right: 10),
+                    ],
+                  ),
+                ],
+              ),
+            );
           } else {
             return const Text("Please reload app");
           }
