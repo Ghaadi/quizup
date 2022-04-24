@@ -8,6 +8,8 @@ class Header extends StatelessWidget {
   final int _score1;
   var _score2;
 
+  final String username;
+
   final dbRef = FirebaseDatabase.instance
       .reference()
       .child('/Games/games2/players/rawad/total score');
@@ -23,7 +25,8 @@ class Header extends StatelessWidget {
     _score2 = score;
   }
 
-  Header(this._playerColor, this._opponentColor, this._score1, this._score2);
+  Header(this._playerColor, this._opponentColor, this._score1, this._score2,
+      this.username);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +35,6 @@ class Header extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
             final totalScore = snapshot.data;
-            print(totalScore);
-            print(_score2);
             getScore();
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,11 +49,11 @@ class Header extends StatelessWidget {
                       ),
                       Stack(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                             child: Text(
-                              "Salim",
-                              style: TextStyle(
+                              username,
+                              style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
                               ),

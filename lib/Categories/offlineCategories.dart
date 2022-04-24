@@ -40,17 +40,18 @@ class OfflineCategories extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                child: const Display(Icons.badge, "Logo", Colors.black),
+                child: Display(Icons.badge, "Logo", Colors.black, username),
               ),
-              const Display(Icons.flag_rounded, "Lebanon", Colors.black),
-              const Display(
-                  Icons.sports_basketball_outlined, "Sports", Colors.black),
-              const Display(Icons.code, "Computer Science", Colors.black),
-              const Display(Icons.book_outlined, "History", Colors.black),
-              const Display(Icons.biotech_outlined, "Aub info", Colors.black),
-              const Display(Icons.computer, "Tech", Colors.black),
-              const Display(Icons.map_outlined, "Geography", Colors.black),
-              const Display(Icons.music_note, "Music", Colors.black),
+              Display(Icons.flag_rounded, "Lebanon", Colors.black, username),
+              Display(Icons.sports_basketball_outlined, "Sports", Colors.black,
+                  username),
+              Display(Icons.code, "Computer Science", Colors.black, username),
+              Display(Icons.book_outlined, "History", Colors.black, username),
+              Display(
+                  Icons.biotech_outlined, "Aub info", Colors.black, username),
+              Display(Icons.computer, "Tech", Colors.black, username),
+              Display(Icons.map_outlined, "Geography", Colors.black, username),
+              Display(Icons.music_note, "Music", Colors.black, username),
             ],
           ),
         ),

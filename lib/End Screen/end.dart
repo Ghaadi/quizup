@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizup_prototype/Prototype/result.dart';
 import 'package:styled_widget/styled_widget.dart';
 import '../Navigation Drawer/drawer.dart';
 
@@ -11,13 +12,35 @@ import '../Quiz/quiz.dart';
 class EndScreen extends StatelessWidget {
   // final Color _backgroundColor = const Color(0xFF2E3532);
   final Color _backgroundColor = const Color(0xFF212529);
-  final String _username = "Salim";
+  final String _username;
   final String _score;
+  final String _category;
+  final int myScore;
+  final int opponentScore;
 
-  const EndScreen(this._score);
+  const EndScreen(this._score, this._username, this._category, this.myScore,
+      this.opponentScore);
+
+  String winner(myScore, opponetScore) {
+    var result = "";
+    final winner = myScore > opponetScore;
+
+    switch (winner) {
+      case true:
+        result = "you WIN!";
+        break;
+      case false:
+        result = "you LOST!";
+        break;
+      default:
+        result = 'its a tie';
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Result = winner(myScore, opponentScore);
     return Scaffold(
       backgroundColor: _backgroundColor,
       appBar: AppBar(
@@ -26,9 +49,9 @@ class EndScreen extends StatelessWidget {
         toolbarHeight: 60,
         title: Container(
           margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: const Text(
-            "Flags",
-            style: TextStyle(fontSize: 26),
+          child: Text(
+            _category,
+            style: const TextStyle(fontSize: 26),
           ),
         ),
         iconTheme: const IconThemeData(
@@ -42,9 +65,9 @@ class EndScreen extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.fromLTRB(0, 50, 0, 30),
-            child: const Text(
-              "You Win!",
-              style: TextStyle(fontSize: 50, color: Colors.white),
+            child: Text(
+              Result,
+              style: const TextStyle(fontSize: 50, color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
@@ -70,7 +93,8 @@ class EndScreen extends StatelessWidget {
                 "Rematch",
                 () => Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => const Quiz("Flags"),
+                    builder: (BuildContext context) =>
+                        const Quiz("Flags", "salim"),
                   ),
                 ),
               ),

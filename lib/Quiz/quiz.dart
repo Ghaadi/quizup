@@ -17,8 +17,9 @@ import '../Categories/categories.dart';
 
 class Quiz extends StatefulWidget {
   final String _category;
+  final String username;
 
-  const Quiz(this._category);
+  const Quiz(this._category, this.username);
   @override
   State<StatefulWidget> createState() => QuizState();
 }
@@ -158,14 +159,15 @@ class QuizState extends State<Quiz> {
     } else if (_questionNum == _questions.length - 2) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) => EndScreen(_score.toString()),
+          builder: (BuildContext context) => EndScreen(_score.toString(),
+              widget.username, widget._category, _score, challenGerScore),
         ),
       );
     }
   }
 
   void setOpponentScore() {
-    s.SendScore(_score, "rawad");
+    s.SendScore(_score, "Salim");
     s.GetOpponentScore(_score, challenGerScore, 'rawad');
     setState(() {
       challenGerScore = s.getCount();
@@ -189,6 +191,7 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    print(challenGerScore);
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -208,7 +211,7 @@ class QuizState extends State<Quiz> {
                           children: [
                             CircularTimer(_timeLeft),
                             Header(_playerColor, _opponentColor, _score,
-                                challenGerScore),
+                                challenGerScore, widget.username),
                           ],
                         ),
                         Question(questions1[_questionNum]['question']
@@ -231,7 +234,8 @@ class QuizState extends State<Quiz> {
                       ],
                     ),
                   )
-                : EndScreen(_score.toString());
+                : EndScreen(_score.toString(), widget.username,
+                    widget._category, _score, challenGerScore);
           } else {
             return Text("Please reload app");
           }
