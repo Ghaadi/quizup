@@ -3,13 +3,16 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Player {
   int score;
-  late int opponent_score;
   String username;
 
   Player(this.score, this.username);
+  final user = FirebaseAuth.instance.currentUser!;
+  int _Score = 0;
+  late String email;
 
   int getCount() {
     return score;
@@ -45,7 +48,7 @@ class Player {
   }
 
   Future<void> GetOpponentScore(int a, Score, opponent_name) async {
-    SendScore(a, "Salim");
+    //SendScore(a, "Salim");
     GetScore(Score, opponent_name);
   }
 }

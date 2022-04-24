@@ -19,10 +19,10 @@ import '../Transition/transition.dart';
 class Quiz extends StatefulWidget {
   final int _questionNum, _score, _challengerScore;
   final String _category;
+  final String username;
 
-  const Quiz(
-      this._category, this._questionNum, this._score, this._challengerScore);
-
+  const Quiz(this._category, this._questionNum, this.username, this._score,
+      this._challengerScore);
   @override
   State<StatefulWidget> createState() => QuizState();
 }
@@ -153,6 +153,7 @@ class QuizState extends State<Quiz> {
     if (_questionNum < _questions.length - 2) {
       _timeLeft = 108;
       setState(() {
+        //setOpponentScore();
         _score += points;
         // _questionNum++;
       });
@@ -176,6 +177,14 @@ class QuizState extends State<Quiz> {
       );
     }
   }
+
+  /* void setOpponentScore() {
+    s.SendScore(_score, "Salim");
+    s.GetOpponentScore(_score, challenGerScore, 'rawad');
+    setState(() {
+      challenGerScore = s.getCount();
+    });
+  }*/
 
   void _startCountDown() {
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -212,7 +221,7 @@ class QuizState extends State<Quiz> {
                     children: [
                       CircularTimer(_timeLeft),
                       Header(_playerColor, _opponentColor, _score,
-                          _challengerScore),
+                          _challengerScore, widget.username),
                     ],
                   ),
                   Question(questions1[_questionNum]['question']

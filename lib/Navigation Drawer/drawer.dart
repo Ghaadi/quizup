@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quizup_prototype/Navigation%20Drawer/option.dart';
 import 'package:quizup_prototype/Navigation%20Drawer/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'dart:ffi';
 
 class NavDrawer extends StatelessWidget {
   final String _username;
@@ -10,6 +13,11 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _signOut() async {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushNamed(context, '/');
+    }
+
     return SizedBox(
       width: 2.2 * MediaQuery.of(context).size.width / 3,
       child: Drawer(
@@ -62,12 +70,12 @@ class NavDrawer extends StatelessWidget {
               "Settings",
               Colors.grey,
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             ElevatedButton(
-              onPressed: null,
+              onPressed: _signOut,
               child: Container(
                 margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Text(
+                child: const Text(
                   "Sign Out",
                   style: TextStyle(
                     color: Colors.black,

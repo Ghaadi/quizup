@@ -7,12 +7,14 @@ class Display extends StatelessWidget {
   final IconData _icon;
   final String _categoryName;
   final Color _iconColor;
+  final String username;
   // final Function(String) _selectCategory;
 
   const Display(
     this._icon,
     this._categoryName,
     this._iconColor,
+    this.username,
     // this._selectCategory,
   );
 
@@ -26,7 +28,8 @@ class Display extends StatelessWidget {
         onPressed: () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => TransitionScreen(_categoryName, 1, 0, 0),
+            builder: (BuildContext context) =>
+                TransitionScreen(_categoryName, 1, 0, 0),
           ),
         ),
         child: Row(
