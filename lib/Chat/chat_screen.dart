@@ -28,34 +28,34 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  // CollectionReference messages =
-  //     FirebaseFirestore.instance.collection('messages/userMessages');
+  CollectionReference messages =
+      FirebaseFirestore.instance.collection('messages');
   var _controller = TextEditingController();
 
   String message = "";
 
-  // Future<void> addMessage() {
-  //   return messages
-  //       .add({
-  //         'sender': FirebaseAuth.instance.currentUser?.email,
-  //         'text': message
-  //       })
-  //       .then((value) => print("Message Added"))
-  //       .catchError((error) => print("Failed to add user: $error"));
-  // }
+  Future<void> addMessage() {
+    return messages
+        .add({
+          'sender': FirebaseAuth.instance.currentUser?.email,
+          'text': message
+        })
+        .then((value) => print("Message Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: null,
-        // actions: <Widget>[
-        //   IconButton(
-        //       icon: Icon(Icons.close),
-        //       onPressed: () {
-        //         FirebaseAuth.instance.signOut();
-        //       }),
-        // ],
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              }),
+        ],
         title: Text('Chat'),
         backgroundColor: Colors.lightBlueAccent,
       ),
@@ -80,7 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       _controller.clear();
-                      //addMessage();
+                      addMessage();
                     },
                     child: Text(
                       'Send',
