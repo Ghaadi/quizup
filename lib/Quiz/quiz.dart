@@ -6,7 +6,7 @@ import 'FireBaseFetch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'dart:async';
-
+import '../Chat/chat_screen.dart';
 import '../End Screen/end.dart';
 import './answers.dart';
 import './question.dart';
@@ -172,8 +172,11 @@ class QuizState extends State<Quiz> {
     } else if (_questionNum == _questions.length - 2) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) => EndScreen(_score.toString(),
-              widget.username, widget._category, _score, _challengerScore),
+          builder: (BuildContext
+                  context) => /*EndScreen(_score.toString(),
+              widget.username, widget._category, _score, _challengerScore)*/
+              ChatScreen(_score.toString(), widget.username, widget._category,
+                  _score, _challengerScore),
         ),
       );
     }
