@@ -47,6 +47,7 @@ class QuizState extends State<Quiz> {
 
   _fillList() async {
     var s = Player(_challengerScore, 'Salim');
+    s.SendScore(_score, "Salim");
     s.GetScore(_challengerScore, 'Rawad');
     QuestionFetch q = QuestionFetch(_categoryName, user.uid);
     List<Map<dynamic, dynamic>> questionReturn =
