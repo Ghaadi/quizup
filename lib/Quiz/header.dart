@@ -10,9 +10,12 @@ class Header extends StatelessWidget {
 
   final String username;
 
-  final dbRef = FirebaseDatabase.instance
+  /*final dbRef = FirebaseDatabase.instance
       .reference()
-      .child('/Games/games2/players/Rawad/total score');
+      .child('/Games/games2/players/Rawad/total score');*/
+
+  final Stream<QuerySnapshot> OpponentScore =
+      FirebaseFirestore.instance.collection("gameRoom").snapshots();
 
   void getScore() async {
     final dbRef1 = await FirebaseDatabase.instance
@@ -30,85 +33,93 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: dbRef.onValue,
-        builder: (context, snapshot) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: OpponentScore,
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
-            final totalScore = snapshot.data;
-            getScore();
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 40, 0, 0),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.account_circle,
-                        size: 60,
-                      ),
-                      Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                            child: Text(
-                              username,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
+            final data = snapshot.data!.docs;
+
+            for (var element in data) {
+              final opponentScore = element["Rawad"];
+              final messageSender = element['Salim'];
+
+              print(opponentScore);
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 40, 0, 0),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.account_circle,
+                          size: 60,
+                        ),
+                        Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Text(
+                                username,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                            child: Text(
-                              '$_score1',
-                              style: TextStyle(
-                                fontSize: 26,
-                                color: _playerColor,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                              child: Text(
+                                '$_score1',
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  color: _playerColor,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 40, 10, 0),
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                            child: Text(
-                              "Rawad",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(0, 40, 10, 0),
+                    child: Row(
+                      children: [
+                        Stack(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Text(
+                                "Rawad",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.fromLTRB(46, 30, 0, 0),
-                              child: Text(_score2.toString(),
-                                  style: TextStyle(
-                                      fontSize: 26, color: _opponentColor)))
-                        ],
-                      ),
-                      const Icon(
-                        Icons.account_circle,
-                        size: 60,
-                      ),
-                    ],
+                            Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(46, 30, 0, 0),
+                                child: Text("$opponentScore",
+                                    style: TextStyle(
+                                        fontSize: 26, color: _opponentColor)))
+                          ],
+                        ),
+                        const Icon(
+                          Icons.account_circle,
+                          size: 60,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
+                ],
+              );
+            }
           } else {
             return Text('retry');
           }
+          return const Text("error");
         });
   }
 }

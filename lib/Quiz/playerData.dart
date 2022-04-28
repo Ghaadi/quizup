@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,10 +42,10 @@ class Player {
   }
 
   Future<void> SendScore(int a, name) async {
-    FirebaseDatabase.instance
-        .reference()
-        .child("/Games/games2/players/$name")
-        .update({'total score': a});
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("1OqcjzDysPD9llw00htR")
+        .update({"Rawad": a});
   }
 
   Future<void> GetOpponentScore(int a, Score, opponent_name) async {

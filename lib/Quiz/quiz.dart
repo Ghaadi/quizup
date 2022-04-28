@@ -208,6 +208,7 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    s.SendScore(_score, "Salim");
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
