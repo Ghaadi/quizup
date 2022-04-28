@@ -23,6 +23,7 @@ class Quiz extends StatefulWidget {
 
   const Quiz(this._category, this._questionNum, this.username, this._score,
       this._challengerScore);
+
   @override
   State<StatefulWidget> createState() => QuizState();
 }
@@ -173,12 +174,15 @@ class QuizState extends State<Quiz> {
     } else if (_questionNum == _questions.length - 2) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext
-                  context) => /*EndScreen(_score.toString(),
-              widget.username, widget._category, _score, _challengerScore)*/
-              ChatScreen(_score.toString(), widget.username, widget._category,
-                  _score, _challengerScore),
-        ),
+            builder: (BuildContext context) => EndScreen(
+                  _score.toString(),
+                  widget.username,
+                  widget._category,
+                  _challengerScore.toString(),
+                )
+            // ChatScreen(_score.toString(), widget.username, widget._category,
+            //     _score, _challengerScore),
+            ),
       );
     }
   }
@@ -213,7 +217,9 @@ class QuizState extends State<Quiz> {
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Scaffold(
+              backgroundColor: Color(0xFF2E3532),
+            );
           } else if (snapshot.connectionState == ConnectionState.none) {
             return const Text("Error");
           } else if (snapshot.connectionState == ConnectionState.done) {
@@ -226,8 +232,13 @@ class QuizState extends State<Quiz> {
                     // Circular Timer and Player Icon
                     children: [
                       CircularTimer(_timeLeft),
-                      Header(_playerColor, _opponentColor, _score,
-                          _challengerScore, widget.username),
+                      Header(
+                        _playerColor,
+                        _opponentColor,
+                        _score,
+                        _challengerScore,
+                        widget.username,
+                      ),
                     ],
                   ),
                   Question(questions1[_questionNum]['question']
@@ -255,11 +266,3 @@ class QuizState extends State<Quiz> {
         });
   }
 }
-
-/*void main() {
-  runApp(
-    MaterialApp(
-      home: Quiz("Lebanon"),
-    ),
-  );
-}*/

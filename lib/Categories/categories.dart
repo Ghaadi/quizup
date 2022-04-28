@@ -14,11 +14,14 @@ class Categories extends StatefulWidget {
 
 class categories extends State<Categories> {
   var username = '';
-  final Color _backgroundColor = Colors.green;
+
+  // final Color _backgroundColor = const Color(0xFF9D858D);
+  final Color _backgroundColor = const Color(0xFF294936);
 
   final user = FirebaseAuth.instance.currentUser!;
 
   late Future _nameLoader;
+
   _getName() async {
     final name = QuestionFetch('', user.uid);
 
@@ -41,7 +44,7 @@ class categories extends State<Categories> {
             future: _nameLoader,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return Container();
               } else if (snapshot.connectionState == ConnectionState.done) {
                 return Scaffold(
                   backgroundColor: _backgroundColor,

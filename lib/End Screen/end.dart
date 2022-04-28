@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizup_prototype/Prototype/result.dart';
 import 'package:styled_widget/styled_widget.dart';
+import '../Chat/chat_screen.dart';
 import '../Navigation Drawer/drawer.dart';
 
 import './player.dart';
@@ -14,29 +15,32 @@ class EndScreen extends StatelessWidget {
   final Color _backgroundColor = const Color(0xFF212529);
   final String _score, _categoryName;
   final String _username;
-  final int myScore;
-  final int opponentScore;
+  final String opponentScore;
 
-  const EndScreen(this._score, this._username, this._categoryName, this.myScore,
-      this.opponentScore);
+  const EndScreen(
+    this._score,
+    this._username,
+    this._categoryName,
+    this.opponentScore,
+  );
 
-  String winner(myScore, opponetScore) {
+  String winner(myScore, opponentScore) {
     var result = "";
 
     if (myScore > opponentScore) {
-      result = "YOU WON!!";
+      result = "YOU WON!";
     } else if (myScore < opponentScore) {
-      result = "YOU LOST :(";
+      result = "YOU LOST!";
     }
     if (myScore == opponentScore) {
-      result = "NO ONE WON :)";
+      result = "TIE!";
     }
     return result;
   }
 
   @override
   Widget build(BuildContext context) {
-    final Result = winner(myScore, opponentScore);
+    final Result = winner(int.parse(_score), int.parse(opponentScore));
     return Scaffold(
       backgroundColor: _backgroundColor,
       appBar: AppBar(
@@ -73,6 +77,20 @@ class EndScreen extends StatelessWidget {
               Player(_username, Icons.account_circle),
               const Player("Rawad", Icons.account_circle),
             ],
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.chat,
+              size: 30,
+            ),
+            color: Colors.lightBlue,
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ChatScreen(_score, _username, _categoryName, opponentScore),
+              ),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -21,7 +21,7 @@ class Display extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 1.11,
+      width: MediaQuery.of(context).size.width / 1.07,
       height: MediaQuery.of(context).size.height / 11.39,
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
