@@ -68,6 +68,21 @@ class QuestionFetch {
       case "Aub info":
         return "Categories/Category D: AUB info";
 
+      case "Computers":
+        return "/Categories/Category G: Computers";
+
+      case "Sports":
+        return "/Categories/Category H Sports: ";
+
+      case "Math":
+        return "/Categories/Category I: Mathematics";
+
+      case "Health":
+        return "/Categories/Category F: Public Health & Nutrition";
+
+      case "General knowledge":
+        return "/Categories/Category B: General Knowledges";
+
       default:
         return "";
     }
@@ -103,7 +118,7 @@ class QuestionFetch {
           {'text': data["Q3"]["answers"][0], 'points': 0},
           {'text': data["Q3"]["answers"][2], 'points': 0},
         ],
-        'image': '',
+        'image': null,
       },
       {
         'question': data["Q4"]["question"],
@@ -113,7 +128,7 @@ class QuestionFetch {
           {'text': data["Q4"]["answers"][1], 'points': 0},
           {'text': data["Q4"]["answers"][2], 'points': 0},
         ],
-        'image': '',
+        'image': null,
       },
       {
         'question': data["Q5"]["question"],

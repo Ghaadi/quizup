@@ -40,7 +40,7 @@ class OfflineCategories extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                child: Display(Icons.badge, "Logo", Colors.black, username),
+                child: Display(Icons.apple, "Health", Colors.black, username),
               ),
               Display(Icons.flag_rounded, "Lebanon", Colors.black, username),
               Display(Icons.sports_basketball_outlined, "Sports", Colors.black,
@@ -49,9 +49,10 @@ class OfflineCategories extends StatelessWidget {
               Display(Icons.book_outlined, "History", Colors.black, username),
               Display(
                   Icons.biotech_outlined, "Aub info", Colors.black, username),
-              Display(Icons.computer, "Tech", Colors.black, username),
-              Display(Icons.map_outlined, "Geography", Colors.black, username),
-              Display(Icons.music_note, "Music", Colors.black, username),
+              Display(Icons.computer, "Computers", Colors.black, username),
+              Display(Icons.map_outlined, "General knowledge", Colors.black,
+                  username),
+              Display(Icons.numbers, "Math", Colors.black, username)
             ],
           ),
         ),
