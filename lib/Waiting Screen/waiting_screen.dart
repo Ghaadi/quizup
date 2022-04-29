@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../Transition/transition.dart';
 
 // void main() {
 //   runApp(
@@ -18,6 +20,28 @@ class WaitingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final db = FirebaseFirestore.instance;
+    db
+        .collection("opponentStatus")
+        .where("playerjoined")
+        .snapshots()
+        .listen((event) {
+      final cities = [];
+      for (var doc in event.docs) {
+        cities.add(doc.data()["playerjoined"]);
+      }
+      print(cities);
+      final player1status = cities[0];
+      final player2status = cities[0];
+
+      if ((player1status == true) && (player2status == true)) {
+        /*Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    TransitionScreen(_category, 1, 0, 0, _username)));*/
+      }
+    });
     return Scaffold(
       backgroundColor: const Color(0xFF2E3532),
       body: Center(
