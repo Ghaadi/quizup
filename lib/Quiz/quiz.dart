@@ -62,7 +62,7 @@ class QuizState extends State<Quiz> {
     _score = widget._score;
     _challengerScore = widget._challengerScore;
     _loader = _fillList();
-    _startCountDown();
+    //_startCountDown();
   }
 
   _fillList() async {
@@ -191,6 +191,7 @@ class QuizState extends State<Quiz> {
         ),
       );
     } else if (_questionNum == _questions.length - 2) {
+      waitingRoomReset();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (BuildContext context) => EndScreen(
@@ -204,6 +205,18 @@ class QuizState extends State<Quiz> {
             ),
       );
     }
+  }
+
+  void waitingRoomReset() async {
+    FirebaseFirestore.instance
+        .collection("opponentStatus")
+        .doc("opponent1")
+        .update({"playerjoined": false});
+
+    FirebaseFirestore.instance
+        .collection("opponentStatus")
+        .doc("opponent2")
+        .update({"playerjoined": false});
   }
 
   /* void setOpponentScore() {

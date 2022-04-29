@@ -3,6 +3,7 @@ import 'package:quizup_prototype/Prototype/result.dart';
 import 'package:styled_widget/styled_widget.dart';
 import '../Chat/chat_screen.dart';
 import '../Navigation Drawer/drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import './player.dart';
 import './points.dart';
