@@ -204,6 +204,18 @@ class QuizState extends State<Quiz> {
         .update({"questionAnswered": true});
   }
 
+  void questionStatusReset() async {
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("player1")
+        .update({"questionAnswered": true});
+
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("player2")
+        .update({"questionAnswered": true});
+  }
+
   /* void setOpponentScore() {
     s.SendScore(_score, "Salim");
     s.GetOpponentScore(_score, challenGerScore, 'rawad');
