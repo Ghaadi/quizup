@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import './playerData.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -75,6 +77,8 @@ class QuizState extends State<Quiz> {
   }
 
   var s = Player(0, 'Salim');
+
+  final db = FirebaseFirestore.instance;
 
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
@@ -227,6 +231,25 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    db
+        .collection('opponentStatus')
+        .where("joined", isEqualTo: false)
+        .snapshots()
+        .listen((event) {
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.added:
+            print("Opponent joined: ${change.doc.data()}");
+            break;
+          case DocumentChangeType.modified:
+            print("Opponent joined: ${change.doc.data()}");
+            break;
+          case DocumentChangeType.removed:
+            print("Opponent Joined: ${change.doc.data()}");
+            break;
+        }
+      }
+    });
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {

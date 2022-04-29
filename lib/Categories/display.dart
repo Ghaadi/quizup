@@ -10,11 +10,12 @@ class Display extends StatelessWidget {
   final String username;
   // final Function(String) _selectCategory;
 
-  const Display(
+  Display(
     this._icon,
     this._categoryName,
     this._iconColor,
     this.username,
+
     // this._selectCategory,
   );
 
