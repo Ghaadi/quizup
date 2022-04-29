@@ -171,7 +171,6 @@ class QuizState extends State<Quiz> {
   var _opponentTimeLeft = 106;
 
   void _answerQuestion(int points) {
-    _hasAnswered = true;
     questionStatuschange();
     if (_questionNum < _questions.length - 2) {
       setState(() {
@@ -225,6 +224,7 @@ class QuizState extends State<Quiz> {
           });
         } else {
           // _timeLeft = 108;
+          questionStatuschange();
           setState(() {
             _answerQuestion(0);
           });
@@ -347,7 +347,8 @@ class QuizState extends State<Quiz> {
                         questions1[_questionNum]['image'],
                         _answerQuestion,
                       ),
-                      LinearTimer(_opponentColor, _opponentTimeLeft).padding(right: 10),
+                      LinearTimer(_opponentColor, _opponentTimeLeft)
+                          .padding(right: 10),
                     ],
                   ),
                 ],
