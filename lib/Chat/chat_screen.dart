@@ -53,7 +53,8 @@ class _ChatScreenState extends State<ChatScreen> {
               widget._username,
               widget._categoryName,
               widget.myScore,
-              widget.opponentScore)));
+              widget.opponentScore,
+              false)));
     });
   }
 

@@ -17,7 +17,7 @@ class Header extends StatelessWidget {
   final Stream<QuerySnapshot> OpponentScore =
       FirebaseFirestore.instance.collection("gameRoom").snapshots();
 
-  void getScore() async {
+  /*void getScore() async {
     final dbRef1 = await FirebaseDatabase.instance
         .reference()
         .child('/Games/games2/players/Rawad/total score')
@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
     final score = dbRef1.value as int;
 
     _score2 = score;
-  }
+  }*/
 
   Header(this._playerColor, this._opponentColor, this._score1, this._score2,
       this.username);

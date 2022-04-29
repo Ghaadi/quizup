@@ -16,9 +16,10 @@ class EndScreen extends StatelessWidget {
   final String _username;
   final int myScore;
   final int opponentScore;
+  final bool opponentJoined;
 
   const EndScreen(this._score, this._username, this._categoryName, this.myScore,
-      this.opponentScore);
+      this.opponentScore, this.opponentJoined);
 
   String winner(myScore, opponetScore) {
     var result = "";
@@ -89,13 +90,8 @@ class EndScreen extends StatelessWidget {
                 "Rematch",
                 () => Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => Quiz(
-                      _categoryName,
-                      1,
-                      _username,
-                      0,
-                      0,
-                    ),
+                    builder: (BuildContext context) =>
+                        Quiz(_categoryName, 1, _username, 0, 0),
                   ),
                 ),
               ),

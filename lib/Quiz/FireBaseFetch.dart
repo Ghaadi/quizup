@@ -34,6 +34,14 @@ class QuestionFetch {
     return questions;
   }
 
+  void randomize(List<Map<String, dynamic>> questions) {
+    for (var question in questions) {
+      final listOfanswers = question["answers"] as List;
+
+      listOfanswers.shuffle();
+    }
+  }
+
   Future<String> getUsername(String Uid) async {
     final snapshot = await FirebaseDatabase.instance
         .reference()
@@ -174,6 +182,7 @@ class QuestionFetch {
 
     questionList = questions;
 
-    return questions;
+    randomize(questionList);
+    return questionList;
   }
 }

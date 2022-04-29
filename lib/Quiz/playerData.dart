@@ -19,16 +19,13 @@ class Player {
     return score;
   }
 
-  void createGame(myName, opponent_name) {
-    FirebaseDatabase.instance.reference().child("/Games").update({
-      'games2': {
-        'players': {
-          '$myName': {'id': '101', 'total score': 0},
-          '$opponent_name': {'id': '102', 'name': 'rawad', 'total score': 0}
-        }
-      }
-    });
+  void createGame(myName) {
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .add({"Salim": 0, "gameDone": false});
   }
+
+  void findGame(myName) async {}
 
   Future<int> GetScore(score1, name) async {
     final snapshot = await FirebaseDatabase.instance

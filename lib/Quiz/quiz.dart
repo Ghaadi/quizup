@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import './playerData.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -15,13 +17,14 @@ import './header.dart';
 import './circularTimer.dart';
 import '../Categories/categories.dart';
 import '../Transition/transition.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Quiz extends StatefulWidget {
   final int _questionNum, _score, _challengerScore;
   final String _category;
   final String username;
 
-  const Quiz(this._category, this._questionNum, this.username, this._score,
+  Quiz(this._category, this._questionNum, this.username, this._score,
       this._challengerScore);
   @override
   State<StatefulWidget> createState() => QuizState();
@@ -33,6 +36,19 @@ class QuizState extends State<Quiz> {
   late int _questionNum, _score, _challengerScore;
   List<Map<dynamic, dynamic>> questions1 = [{}];
 
+  /*Future<bool> getopponentStatus() async {
+    final snapshot = await FirebaseDatabase.instance
+        .reference()
+        .child('/Games/games2/players/opponentJoined')
+        .get();
+
+    final opponentStatus = snapshot.value as bool;
+
+    opponentJoined = opponentStatus;
+
+    return opponentJoined;
+  }*/
+
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -43,19 +59,18 @@ class QuizState extends State<Quiz> {
     _score = widget._score;
     _challengerScore = widget._challengerScore;
     _loader = _fillList();
+    //_startCountDown();
   }
 
   _fillList() async {
     var s = Player(_challengerScore, 'Salim');
-    s.SendScore(_score, "Salim");
-    s.GetScore(_challengerScore, 'Rawad');
+    //s.createGame(widget.username);
+    //s.SendScore(_score, "Salim");
     QuestionFetch q = QuestionFetch(_categoryName, user.uid);
     List<Map<dynamic, dynamic>> questionReturn =
         await q.getData(q.category_name);
 
     questions1 = questionReturn;
-
-    _challengerScore = s.getCount();
   }
 
   var s = Player(0, 'Salim');
@@ -208,7 +223,6 @@ class QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    s.SendScore(_score, "Salim");
     return FutureBuilder(
         future: _loader,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -250,7 +264,7 @@ class QuizState extends State<Quiz> {
               ),
             );
           } else {
-            return const Text("Please reload app");
+            return Text("reload app");
           }
         });
   }

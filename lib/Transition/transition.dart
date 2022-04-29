@@ -10,13 +10,8 @@ class TransitionScreen extends StatelessWidget {
   final String _category;
   final String _username;
 
-  const TransitionScreen(
-    this._category,
-    this._questionNum,
-    this._score,
-    this._challengerScore,
-    this._username,
-  );
+  const TransitionScreen(this._category, this._questionNum, this._score,
+      this._challengerScore, this._username);
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +20,7 @@ class TransitionScreen extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (_) => Quiz(
-            _category,
-            _questionNum,
-            _username,
-            _score,
-            _challengerScore,
-          ),
+              _category, _questionNum, _username, _score, _challengerScore),
         ),
       );
     });
