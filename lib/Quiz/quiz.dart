@@ -256,8 +256,19 @@ class QuizState extends State<Quiz> {
         opponentScore1.add(doc.data()["Rawad"]);
       }
       _challengerScore = opponentScore1[0];
+    });
 
-      print(_challengerScore);
+    db
+        .collection("gameRoom")
+        .where("questionAnswered")
+        .snapshots()
+        .listen((event) {
+      final questionsAnswered = [];
+      for (var doc in event.docs) {
+        questionsAnswered.add(doc.data()["questionAnswered"]);
+      }
+      print(questionsAnswered);
+      print(_score);
     });
     return FutureBuilder(
         future: _loader,
