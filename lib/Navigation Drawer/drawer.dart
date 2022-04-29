@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizup_prototype/Navigation%20Drawer/option.dart';
-import 'package:quizup_prototype/Navigation%20Drawer/profile.dart';
+import '../Leaderboard/leaderboard.dart';
+import '../Navigation Drawer/option.dart';
+import '../Navigation Drawer/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'dart:ffi';
@@ -35,59 +36,97 @@ class NavDrawer extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const Option(
+            Option(
               Icons.home_outlined,
               "Home",
               Colors.yellowAccent,
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Leaderboard(),
+                ),
+              ),
             ),
-            const Option(
+            Option(
               Icons.account_tree_outlined,
               "Topics",
               Colors.red,
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Leaderboard(),
+                ),
+              ),
             ),
-            const Option(
+            Option(
               Icons.tag_faces_outlined,
               "Friends",
               Colors.green,
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Leaderboard(),
+                ),
+              ),
             ),
-            const Option(
-              Icons.apps_outlined,
-              "History",
-              Colors.blue,
-            ),
-            const Option(
-              Icons.chat_bubble_outline,
-              "Discussions",
+            Option(
+              Icons.format_list_numbered_rtl_sharp,
+              "Leaderboard",
               Colors.lightBlueAccent,
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Leaderboard(),
+                ),
+              ),
             ),
-            const Option(
+            Option(
               Icons.lock_clock_outlined,
               "Achievements",
               Colors.yellow,
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Leaderboard(),
+                ),
+              ),
             ),
-            const Option(
+            Option(
               Icons.settings_outlined,
               "Settings",
               Colors.grey,
-            ),
-            const SizedBox(height: 25),
-            ElevatedButton(
-              onPressed: _signOut,
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: const Text(
-                  "Sign Out",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Leaderboard(),
                 ),
-                color: Colors.red,
-                width: double.infinity,
-                height: 65,
-                alignment: Alignment.center,
+              ),
+            ),
+            const Align(
+              child: Divider(
+                color: Colors.grey,
+              ),
+              alignment: Alignment.bottomCenter,
+            ),
+            Container(
+              width: 400,
+              alignment: Alignment.bottomCenter,
+              child: TextButton(
+                onPressed: _signOut,
+                child: Container(
+                  child: const Text(
+                    "Sign Out",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  width: double.infinity,
+                  height: 40,
+                  alignment: Alignment.center,
+                ),
               ),
             )
           ],

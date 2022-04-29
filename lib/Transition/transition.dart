@@ -15,7 +15,7 @@ class TransitionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 1), () {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -45,13 +45,13 @@ class TransitionScreen extends StatelessWidget {
                       children: <Widget>[
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                           FadeAnimatedText(_category,
-                              duration: const Duration(seconds: 2),
+                              duration: const Duration(seconds: 1),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ]),
                         AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                           FadeAnimatedText('Round $_questionNum',
-                              duration: const Duration(seconds: 2),
+                              duration: const Duration(seconds: 1),
                               fadeOutBegin: 0.9,
                               fadeInEnd: 0.4),
                         ]),

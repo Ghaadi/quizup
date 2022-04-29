@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height / 11,
       width: MediaQuery.of(context).size.width / 2.2,
-      margin: const EdgeInsets.fromLTRB(0, 65, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 55, 0, 0),
       child: ElevatedButton(
         onPressed: _buttonFunc,
         child: Text(

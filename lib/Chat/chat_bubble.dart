@@ -17,23 +17,27 @@ class _ChatBubbleState extends State<ChatBubble> {
   String? loggedInEmail = FirebaseAuth.instance.currentUser?.email;
   Map<String, dynamic>? data;
 
+  // List getMessages(snapshot) {
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _usersStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return const Text("Loading");
         }
 
         return Flexible(
           //ignore: unnecessary_new
           child: new ListView(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
@@ -51,31 +55,31 @@ class _ChatBubbleState extends State<ChatBubble> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                       topLeft: isFromMe
-                          ? Radius.circular(20.0)
-                          : Radius.circular(0.0),
-                      bottomLeft: Radius.circular(20.0),
+                          ? const Radius.circular(20.0)
+                          : const Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(20.0),
                       topRight: isFromMe
-                          ? Radius.circular(0.0)
-                          : Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0),
+                          ? const Radius.circular(0.0)
+                          : const Radius.circular(20.0),
+                      bottomRight: const Radius.circular(20.0),
                     )),
-                    margin: EdgeInsets.all(5.0),
+                    margin: const EdgeInsets.all(5.0),
                     color: isFromMe ? Colors.lightBlue : Colors.blueGrey,
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                      padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             message,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                             ),
                           ),
                           Text(
                             email,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.lightGreenAccent,
                               fontSize: 10,
                             ),

@@ -15,22 +15,24 @@ const kSendButtonTextStyle = TextStyle(
 const kMessageTextFieldDecoration = InputDecoration(
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   hintText: 'Type your message here...',
+  hintStyle: TextStyle(color: Colors.white),
   border: InputBorder.none,
 );
 
 const kMessageContainerDecoration = BoxDecoration(
     border: Border(
-  top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+  top: BorderSide(color: Colors.white, width: 2.0),
 ));
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
   final String _score, _categoryName;
   final String _username;
-  final int myScore;
-  final int opponentScore;
-  const ChatScreen(this._score, this._username, this._categoryName,
-      this.myScore, this.opponentScore);
+  final String opponentScore;
+
+  const ChatScreen(
+      this._score, this._username, this._categoryName, this.opponentScore);
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -38,24 +40,13 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   CollectionReference messages =
       FirebaseFirestore.instance.collection('messages');
-  var _controller = TextEditingController();
+  final _controller = TextEditingController();
 
   String message = "";
 
   @override
   void initState() {
     super.initState();
-
-    Timer(const Duration(seconds: 20), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => EndScreen(
-              widget._score.toString(),
-              widget._username,
-              widget._categoryName,
-              widget.myScore,
-              widget.opponentScore,
-              false)));
-    });
   }
 
   Future<void> addMessage() {
@@ -71,17 +62,19 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF2E3532),
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
               onPressed: () {
-                FirebaseAuth.instance.signOut();
+                // FirebaseAuth.instance.signOut();
+                Navigator.pop(context);
               }),
         ],
-        title: Text('Chat'),
-        backgroundColor: Colors.lightBlueAccent,
+        title: const Text('Chat'),
+        backgroundColor: Colors.black,
       ),
       body: SafeArea(
         child: Column(
@@ -95,20 +88,23 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       controller: _controller,
+                      style: const TextStyle(color: Colors.white),
                       onChanged: (value) {
                         message = value;
                       },
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       _controller.clear();
                       addMessage();
                     },
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
+                    child: const Icon(
+                      // 'Send',
+                      // style: kSendButtonTextStyle,
+                      Icons.send,
+                      color: Colors.lightBlueAccent,
                     ),
                   ),
                 ],
@@ -120,9 +116,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-
-/*void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MaterialApp(home: ChatScreen()));
-}*/
