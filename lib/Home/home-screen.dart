@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB9CDE2),
+      backgroundColor: Colors.white,
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -39,19 +39,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 50,
                           fontWeight: FontWeight.bold),
                     ),
-                    const Icon(
-                      Icons.offline_bolt,
-                      color: Colors.redAccent,
-                      size: 100,
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: const Icon(
+                        Icons.offline_bolt,
+                        color: Colors.redAccent,
+                        size: 100,
+                      ),
                     ),
 
                     const SizedBox(
                       height: 25,
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-                      height: 50,
-                      width: 200,
+                      margin: const EdgeInsets.fromLTRB(0, 130, 0, 0),
+                      height: 60,
+                      width: 220,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(
@@ -68,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 25,
                           ),
                         ),
                       ),
@@ -76,43 +79,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 25,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        IconButton(
-                          onPressed: null,
-                          icon: Icon(
-                            Icons.settings,
-                            color: Colors.black,
-                          ),
-                          iconSize: 55,
-                        ),
-                        IconButton(
-                          onPressed: null,
-                          icon: Icon(
-                            Icons.account_circle,
-                            color: Colors.black,
-                          ),
-                          iconSize: 55,
-                        ),
-                        IconButton(
-                          onPressed: null,
-                          icon: Icon(
-                            Icons.format_list_numbered_rtl_sharp,
-                            color: Colors.black,
-                          ),
-                          iconSize: 55,
-                        ),
-                        IconButton(
-                          onPressed: null,
-                          icon: Icon(
-                            Icons.location_history_rounded,
-                            color: Colors.black,
-                          ),
-                          iconSize: 55,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: const [
+                    //     IconButton(
+                    //       onPressed: null,
+                    //       icon: Icon(
+                    //         Icons.settings,
+                    //         color: Colors.black,
+                    //       ),
+                    //       iconSize: 55,
+                    //     ),
+                    //     IconButton(
+                    //       onPressed: null,
+                    //       icon: Icon(
+                    //         Icons.account_circle,
+                    //         color: Colors.black,
+                    //       ),
+                    //       iconSize: 55,
+                    //     ),
+                    //     IconButton(
+                    //       onPressed: null,
+                    //       icon: Icon(
+                    //         Icons.format_list_numbered_rtl_sharp,
+                    //         color: Colors.black,
+                    //       ),
+                    //       iconSize: 55,
+                    //     ),
+                    //     IconButton(
+                    //       onPressed: null,
+                    //       icon: Icon(
+                    //         Icons.location_history_rounded,
+                    //         color: Colors.black,
+                    //       ),
+                    //       iconSize: 55,
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               )
