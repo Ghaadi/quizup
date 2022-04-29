@@ -172,7 +172,7 @@ class QuizState extends State<Quiz> {
 
   void _answerQuestion(int points) {
     // _hasAnswered = true;
-    questionStatuschange();
+    answerStatusChange();
     if (_questionNum < _questions.length - 2) {
       setState(() {
         _score += points;
@@ -198,7 +198,7 @@ class QuizState extends State<Quiz> {
         .update({"playerjoined": false});
   }
 
-  void questionStatuschange() async {
+  void answerStatusChange() async {
     FirebaseFirestore.instance
         .collection("gameRoom")
         .doc("player2")
@@ -237,7 +237,7 @@ class QuizState extends State<Quiz> {
           });
         } else {
           // _timeLeft = 108;
-          questionStatuschange();
+          answerStatusChange();
           setState(() {
             _answerQuestion(0);
           });
