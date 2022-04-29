@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-void main() {
-  runApp(
-    const MaterialApp(
-      home: WaitingScreen(),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     const MaterialApp(
+//       home: WaitingScreen(),
+//     ),
+//   );
+// }
 
 class WaitingScreen extends StatelessWidget {
-  const WaitingScreen({Key? key}) : super(key: key);
+  final String _category;
+  final String _username;
+
+  const WaitingScreen(this._category, this._username, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

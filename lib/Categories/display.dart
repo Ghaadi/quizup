@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Waiting Screen/waiting_screen.dart';
 import '../Transition/transition.dart';
 
 import '../Quiz/quiz.dart';
@@ -8,6 +9,7 @@ class Display extends StatelessWidget {
   final String _categoryName;
   final Color _iconColor;
   final String username;
+
   // final Function(String) _selectCategory;
 
   Display(
@@ -30,7 +32,8 @@ class Display extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (BuildContext context) =>
-                TransitionScreen(_categoryName, 1, 0, 0, username),
+                // TransitionScreen(_categoryName, 1, 0, 0, username),
+                WaitingScreen(_categoryName, username),
           ),
         ),
         child: Row(
