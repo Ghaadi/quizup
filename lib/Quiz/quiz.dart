@@ -63,6 +63,7 @@ class QuizState extends State<Quiz> {
     _challengerScore = widget._challengerScore;
     _loader = _fillList();
     _startCountDown();
+    _opponentStartCountDown();
   }
 
   _fillList() async {
@@ -171,6 +172,7 @@ class QuizState extends State<Quiz> {
 
   void _answerQuestion(int points) {
     _hasAnswered = true;
+    questionStatuschange();
     if (_questionNum < _questions.length - 2) {
       setState(() {
         _score += points;
@@ -194,6 +196,13 @@ class QuizState extends State<Quiz> {
         .collection("opponentStatus")
         .doc("opponent2")
         .update({"playerjoined": false});
+  }
+
+  void questionStatuschange() async {
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("player1")
+        .update({"questionAnswered": true});
   }
 
   /* void setOpponentScore() {
@@ -227,9 +236,11 @@ class QuizState extends State<Quiz> {
   void _opponentStartCountDown() {
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
       if (!_opponentHasAnswered) {
-        setState(() {
-          _opponentTimeLeft--;
-        });
+        if (_timeLeft > 0) {
+          setState(() {
+            _opponentTimeLeft--;
+          });
+        }
       }
     });
   }
