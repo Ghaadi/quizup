@@ -39,6 +39,13 @@ class EndScreen extends StatelessWidget {
     return result;
   }
 
+  void resetScores() async {
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("SlODkfYRO7rTcemoz0im")
+        .update({"Salim": 0, "Rawad": 0});
+  }
+
   @override
   Widget build(BuildContext context) {
     final Result = winner(int.parse(_score), int.parse(opponentScore));
@@ -115,10 +122,10 @@ class EndScreen extends StatelessWidget {
               ),
               Button(
                 "Play Another",
-                () => Navigator.pushReplacementNamed(
-                  context,
-                  '/categories',
-                ),
+                () {
+                  resetScores();
+                  Navigator.pushReplacementNamed(context, '/categories');
+                },
               ),
             ],
           ),

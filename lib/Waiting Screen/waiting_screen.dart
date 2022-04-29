@@ -20,6 +20,25 @@ class WaitingScreen extends StatelessWidget {
   const WaitingScreen(this._category, this._username, {Key? key})
       : super(key: key);
 
+  void waitingRoomReset() async {
+    FirebaseFirestore.instance
+        .collection("opponentStatus")
+        .doc("opponent1")
+        .update({"playerjoined": false});
+
+    FirebaseFirestore.instance
+        .collection("opponentStatus")
+        .doc("opponent2")
+        .update({"playerjoined": false});
+  }
+
+  void resetScores() async {
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("SlODkfYRO7rTcemoz0im")
+        .update({"Salim": 0});
+  }
+
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
@@ -72,6 +91,8 @@ class WaitingScreen extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () {
+                  resetScores();
+                  waitingRoomReset();
                   Navigator.pop(context);
                 },
                 child: const Text(

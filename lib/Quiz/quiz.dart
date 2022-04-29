@@ -66,9 +66,9 @@ class QuizState extends State<Quiz> {
   }
 
   _fillList() async {
-    var s = Player(_challengerScore, 'Salim');
+    // var s = Player(_challengerScore, 'Salim');
     //Rs.GetScore(_challengerScore, "name");
-    s.SendScore(_score, "Salim");
+    // s.SendScore(_score, "Salim");
     QuestionFetch q = QuestionFetch(_categoryName, user.uid);
     List<Map<dynamic, dynamic>> questionReturn =
         await q.getData(q.category_name);
@@ -178,6 +178,8 @@ class QuizState extends State<Quiz> {
         _score += points;
         // _questionNum++;
       });
+      var s = Player(_challengerScore, 'Salim');
+      s.SendScore(_score, "salim");
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
