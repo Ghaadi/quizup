@@ -9,10 +9,10 @@ import './offlineCategories.dart';
 class Categories extends StatefulWidget {
   // const Categories({required this.didSelectCategory});
   @override
-  State<StatefulWidget> createState() => categories();
+  State<StatefulWidget> createState() => _CategoriesState();
 }
 
-class categories extends State<Categories> {
+class _CategoriesState extends State<Categories> {
   var username = '';
 
   // final Color _backgroundColor = const Color(0xFF9D858D);
@@ -73,7 +73,7 @@ class categories extends State<Categories> {
                           Container(
                             margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                             child: Display(
-                                Icons.apple, "Health", Colors.black, username),
+                                Icons.health_and_safety, "Health", Colors.black, username),
                           ),
                           Display(Icons.flag_rounded, "Lebanon", Colors.black,
                               username),
@@ -83,7 +83,7 @@ class categories extends State<Categories> {
                               username),
                           Display(Icons.book_outlined, "History", Colors.black,
                               username),
-                          Display(Icons.biotech_outlined, "Aub info",
+                          Display(Icons.biotech_outlined, "AUB Info",
                               Colors.black, username),
                           Display(Icons.computer, "Computers", Colors.black,
                               username),

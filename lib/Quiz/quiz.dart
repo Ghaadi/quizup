@@ -62,7 +62,7 @@ class QuizState extends State<Quiz> {
     _score = widget._score;
     _challengerScore = widget._challengerScore;
     _loader = _fillList();
-    //_startCountDown();
+    _startCountDown();
   }
 
   _fillList() async {
@@ -172,7 +172,7 @@ class QuizState extends State<Quiz> {
 
   void _answerQuestion(int points) {
     if (_questionNum < _questions.length - 2) {
-      _timeLeft = 108;
+      // _timeLeft = 108;
       setState(() {
         //setOpponentScore();
         _score += points;
@@ -194,7 +194,7 @@ class QuizState extends State<Quiz> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (BuildContext context) => EndScreen(
-                  _score.toString(),
+                  (_score + points).toString(),
                   widget.username,
                   widget._category,
                   _challengerScore.toString(),
@@ -221,7 +221,7 @@ class QuizState extends State<Quiz> {
           _timeLeft--;
         });
       } else {
-        _timeLeft = 108;
+        // _timeLeft = 108;
         setState(() {
           _answerQuestion(0);
         });
@@ -298,7 +298,7 @@ class QuizState extends State<Quiz> {
               ),
             );
           } else {
-            return Text("reload app");
+            return const Text("reload app");
           }
         });
   }
