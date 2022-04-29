@@ -28,14 +28,16 @@ class Display extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 11.39,
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) =>
-                // TransitionScreen(_categoryName, 1, 0, 0, username),
-                WaitingScreen(_categoryName, username),
-          ),
-        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  // TransitionScreen(_categoryName, 1, 0, 0, username),
+                  WaitingScreen(_categoryName, username),
+            ),
+          );
+        },
         child: Row(
           children: [
             Container(

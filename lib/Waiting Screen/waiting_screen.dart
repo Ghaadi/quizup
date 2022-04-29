@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,20 +28,22 @@ class WaitingScreen extends StatelessWidget {
         .where("playerjoined")
         .snapshots()
         .listen((event) {
-      final cities = [];
+      final playersState = [];
       for (var doc in event.docs) {
-        cities.add(doc.data()["playerjoined"]);
+        playersState.add(doc.data()["playerjoined"]);
       }
-      print(cities);
-      final player1status = cities[0];
-      final player2status = cities[0];
+      print(playersState);
+      final player1status = playersState[0];
+      final player2status = playersState[1];
 
       if ((player1status == true) && (player2status == true)) {
-        /*Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    TransitionScreen(_category, 1, 0, 0, _username)));*/
+        Timer.periodic(const Duration(seconds: 2), (timer) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      TransitionScreen(_category, 1, 0, 0, _username)));
+        });
       }
     });
     return Scaffold(
@@ -70,7 +74,10 @@ class WaitingScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("Cancel", style: TextStyle(color: Colors.red, fontSize: 25),))
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.red, fontSize: 25),
+                ))
           ],
         ),
       ),
