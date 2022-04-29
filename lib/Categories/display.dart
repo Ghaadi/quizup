@@ -37,12 +37,14 @@ class Display extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
         onPressed: () {
+
           updatePlayerStatus();
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (BuildContext context) =>
                   // TransitionScreen(_categoryName, 1, 0, 0, username),
+
                   WaitingScreen(_categoryName, username),
             ),
           );

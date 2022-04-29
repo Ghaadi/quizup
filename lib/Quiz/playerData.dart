@@ -12,7 +12,6 @@ class Player {
 
   Player(this.score, this.username);
   final user = FirebaseAuth.instance.currentUser!;
-  int _Score = 0;
   late String email;
 
   int getCount() {

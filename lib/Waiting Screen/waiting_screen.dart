@@ -32,13 +32,6 @@ class WaitingScreen extends StatelessWidget {
         .update({"playerjoined": false});
   }
 
-  void resetScores() async {
-    FirebaseFirestore.instance
-        .collection("gameRoom")
-        .doc("SlODkfYRO7rTcemoz0im")
-        .update({"Salim": 0});
-  }
-
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
@@ -91,7 +84,6 @@ class WaitingScreen extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () {
-                  resetScores();
                   waitingRoomReset();
                   Navigator.pop(context);
                 },

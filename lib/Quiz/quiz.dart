@@ -62,7 +62,7 @@ class QuizState extends State<Quiz> {
     _score = widget._score;
     _challengerScore = widget._challengerScore;
     _loader = _fillList();
-    //_startCountDown();
+    _startCountDown();
   }
 
   _fillList() async {
@@ -83,8 +83,6 @@ class QuizState extends State<Quiz> {
   final Color _playerColor = Colors.red;
   final Color _opponentColor = Colors.blue;
   final Color _backgroundColor = const Color(0xFF2E3532);
-
-  bool _countdownStarted = false;
 
   final _questions = const [
     {
@@ -171,15 +169,13 @@ class QuizState extends State<Quiz> {
   var _timeLeft = 106;
 
   void _answerQuestion(int points) {
+    _hasAnswered = true;
     if (_questionNum < _questions.length - 2) {
-      // _timeLeft = 108;
       setState(() {
-        //setOpponentScore();
         _score += points;
-        // _questionNum++;
       });
       var s = Player(_challengerScore, 'Salim');
-      s.SendScore(_score, "salim");
+      s.SendScore(_score, "Salim");
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -193,11 +189,14 @@ class QuizState extends State<Quiz> {
         ),
       );
     } else if (_questionNum == _questions.length - 2) {
+      _score += points;
+      var s = Player(_challengerScore, 'Salim');
+      s.SendScore(_score, "Salim");
       waitingRoomReset();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (BuildContext context) => EndScreen(
-                  (_score + points).toString(),
+                  _score.toString(),
                   widget.username,
                   widget._category,
                   _challengerScore.toString(),
@@ -229,17 +228,21 @@ class QuizState extends State<Quiz> {
     });
   }*/
 
+  bool _hasAnswered = false;
+
   void _startCountDown() {
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (_timeLeft > 0) {
-        setState(() {
-          _timeLeft--;
-        });
-      } else {
-        // _timeLeft = 108;
-        setState(() {
-          _answerQuestion(0);
-        });
+      if (!_hasAnswered) {
+        if (_timeLeft > 0) {
+          setState(() {
+            _timeLeft--;
+          });
+        } else {
+          // _timeLeft = 108;
+          setState(() {
+            _answerQuestion(0);
+          });
+        }
       }
     });
   }
