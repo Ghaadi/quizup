@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const MaterialApp(home: HomeScreen()),
+    const MaterialApp(
+      home: HomeScreen(),
+    ),
   );
 }
 
@@ -18,14 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFB9CDE2),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -46,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.redAccent,
                       size: 100,
                     ),
+
                     const SizedBox(
                       height: 25,
                     ),

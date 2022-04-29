@@ -22,10 +22,10 @@ class Display extends StatelessWidget {
     // this._selectCategory,
   );
 
-  void updatePlayerstatus() async {
+  void updatePlayerStatus() async {
     FirebaseFirestore.instance
         .collection("opponentStatus")
-        .doc("opponent1")
+        .doc("opponent2")
         .update({"playerjoined": true});
   }
 
@@ -37,7 +37,7 @@ class Display extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
         onPressed: () {
-          updatePlayerstatus();
+          updatePlayerStatus();
           Navigator.push(
             context,
             MaterialPageRoute(
