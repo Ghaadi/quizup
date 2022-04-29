@@ -42,8 +42,6 @@ class Header extends StatelessWidget {
             for (var element in data) {
               final opponentScore = element["Rawad"];
               final messageSender = element['Salim'];
-
-              print(opponentScore);
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

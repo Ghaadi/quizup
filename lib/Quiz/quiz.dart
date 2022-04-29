@@ -67,8 +67,8 @@ class QuizState extends State<Quiz> {
 
   _fillList() async {
     var s = Player(_challengerScore, 'Salim');
-    //s.createGame(widget.username);
-    //s.SendScore(_score, "Salim");
+    //Rs.GetScore(_challengerScore, "name");
+    s.SendScore(_score, "Salim");
     QuestionFetch q = QuestionFetch(_categoryName, user.uid);
     List<Map<dynamic, dynamic>> questionReturn =
         await q.getData(q.category_name);
@@ -232,23 +232,17 @@ class QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     db
-        .collection('opponentStatus')
-        .where("joined", isEqualTo: false)
+        .collection("gameRoom")
+        .where("SlODkfYRO7rTcemoz0im")
         .snapshots()
         .listen((event) {
-      for (var change in event.docChanges) {
-        switch (change.type) {
-          case DocumentChangeType.added:
-            print("Opponent joined: ${change.doc.data()}");
-            break;
-          case DocumentChangeType.modified:
-            print("Opponent joined: ${change.doc.data()}");
-            break;
-          case DocumentChangeType.removed:
-            print("Opponent Joined: ${change.doc.data()}");
-            break;
-        }
+      final opponentScore1 = [];
+      for (var doc in event.docs) {
+        opponentScore1.add(doc.data()["Rawad"]);
       }
+      _challengerScore = opponentScore1[0];
+
+      print(_challengerScore);
     });
     return FutureBuilder(
         future: _loader,

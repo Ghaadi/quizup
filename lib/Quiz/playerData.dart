@@ -28,21 +28,18 @@ class Player {
   void findGame(myName) async {}
 
   Future<int> GetScore(score1, name) async {
-    final snapshot = await FirebaseDatabase.instance
-        .reference()
-        .child('/Games/games2/players/$name/total score')
-        .get();
-    final counter = snapshot.value as int;
-    score = counter;
-    score1 = counter;
-    return score1;
+    final db = FirebaseFirestore.instance;
+    int score = await db.collection("gameRoom").where("Rawad").get() as int;
+
+    score1 = score;
+    return score;
   }
 
   Future<void> SendScore(int a, name) async {
     FirebaseFirestore.instance
         .collection("gameRoom")
-        .doc("1OqcjzDysPD9llw00htR")
-        .update({"Rawad": a});
+        .doc("SlODkfYRO7rTcemoz0im")
+        .update({"Salim": a});
   }
 
   Future<void> GetOpponentScore(int a, Score, opponent_name) async {
