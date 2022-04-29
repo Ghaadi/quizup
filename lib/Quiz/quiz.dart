@@ -171,6 +171,7 @@ class QuizState extends State<Quiz> {
   var _opponentTimeLeft = 106;
 
   void _answerQuestion(int points) {
+    // _hasAnswered = true;
     questionStatuschange();
     if (_questionNum < _questions.length - 2) {
       setState(() {
@@ -200,7 +201,7 @@ class QuizState extends State<Quiz> {
   void questionStatuschange() async {
     FirebaseFirestore.instance
         .collection("gameRoom")
-        .doc("player1")
+        .doc("player2")
         .update({"questionAnswered": true});
   }
 
