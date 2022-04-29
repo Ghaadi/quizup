@@ -66,6 +66,11 @@ class WaitingScreen extends StatelessWidget {
                 ),
               ],
             ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel", style: TextStyle(color: Colors.red, fontSize: 25),))
           ],
         ),
       ),
