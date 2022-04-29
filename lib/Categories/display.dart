@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Waiting Screen/waiting_screen.dart';
 import '../Transition/transition.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../Quiz/quiz.dart';
 
@@ -21,6 +22,13 @@ class Display extends StatelessWidget {
     // this._selectCategory,
   );
 
+  void updatePlayerstatus() async {
+    FirebaseFirestore.instance
+        .collection("opponentStatus")
+        .doc("opponent1")
+        .update({"playerjoined": true});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,6 +37,7 @@ class Display extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
         onPressed: () {
+          updatePlayerstatus();
           Navigator.push(
             context,
             MaterialPageRoute(
