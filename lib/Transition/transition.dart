@@ -20,7 +20,12 @@ class TransitionScreen extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (_) => Quiz(
-              _category, _questionNum, _username, _score, _challengerScore),
+            _category,
+            _questionNum,
+            _username,
+            _score,
+            _challengerScore,
+          ),
         ),
       );
     });

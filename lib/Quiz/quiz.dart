@@ -71,7 +71,7 @@ class QuizState extends State<Quiz> {
     // s.SendScore(_score, "Salim");
     QuestionFetch q = QuestionFetch(_categoryName, user.uid);
     List<Map<dynamic, dynamic>> questionReturn =
-        await q.getData(q.category_name);
+    await q.getData(q.category_name);
 
     questions1 = questionReturn;
   }
@@ -167,6 +167,7 @@ class QuizState extends State<Quiz> {
   ];
 
   var _timeLeft = 106;
+  var _opponentTimeLeft = 106;
 
   void _answerQuestion(int points) {
     _hasAnswered = true;
@@ -176,35 +177,10 @@ class QuizState extends State<Quiz> {
       });
       var s = Player(_challengerScore, 'Salim');
       s.SendScore(_score, "Salim");
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TransitionScreen(
-            _categoryName,
-            _questionNum + 2,
-            _score,
-            _challengerScore,
-            widget.username,
-          ),
-        ),
-      );
     } else if (_questionNum == _questions.length - 2) {
       _score += points;
       var s = Player(_challengerScore, 'Salim');
       s.SendScore(_score, "Salim");
-      waitingRoomReset();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (BuildContext context) => EndScreen(
-                  _score.toString(),
-                  widget.username,
-                  widget._category,
-                  _challengerScore.toString(),
-                )
-            // ChatScreen(_score.toString(), widget.username, widget._category,
-            //     _score, _challengerScore),
-            ),
-      );
     }
   }
 
@@ -229,6 +205,7 @@ class QuizState extends State<Quiz> {
   }*/
 
   bool _hasAnswered = false;
+  bool _opponentHasAnswered = false;
 
   void _startCountDown() {
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -243,6 +220,16 @@ class QuizState extends State<Quiz> {
             _answerQuestion(0);
           });
         }
+      }
+    });
+  }
+
+  void _opponentStartCountDown() {
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (!_opponentHasAnswered) {
+        setState(() {
+          _opponentTimeLeft--;
+        });
       }
     });
   }
@@ -273,57 +260,93 @@ class QuizState extends State<Quiz> {
       print(questionsAnswered);
       print(_score);
       // print(opponentScore1);
-    });
-    return FutureBuilder(
-        future: _loader,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              backgroundColor: Color(0xFF2E3532),
-            );
-          } else if (snapshot.connectionState == ConnectionState.none) {
-            return const Text("Error");
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            return Scaffold(
-              // backgroundColor: Colors.grey[800],
-              backgroundColor: _backgroundColor, // Outer Space Crayola
-              body: Column(
-                children: [
-                  Stack(
-                    // Circular Timer and Player Icon
-                    children: [
-                      CircularTimer(_timeLeft),
-                      Header(
-                        _playerColor,
-                        _opponentColor,
-                        _score,
-                        _challengerScore,
-                        widget.username,
-                      ),
-                    ],
+
+      _hasAnswered = questionsAnswered[1];
+      _opponentHasAnswered = questionsAnswered[2];
+
+      if (questionsAnswered[1] == true && questionsAnswered[2] == true) {
+        if (_questionNum < _questions.length - 2) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  TransitionScreen(
+                    _categoryName,
+                    _questionNum + 2,
+                    _score,
+                    _challengerScore,
+                    widget.username,
                   ),
-                  Question(questions1[_questionNum]['question']
-                      as String), // Question
-                  Row(
-                    // Answers between Timer Bars
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      LinearTimer(_playerColor, _timeLeft).padding(left: 10),
-                      Answers(
-                        questions1[_questionNum]['answers']
-                            as List<Map<String, dynamic>>,
-                        questions1[_questionNum]['image'],
-                        _answerQuestion,
-                      ),
-                      LinearTimer(_opponentColor, 100).padding(right: 10),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return const Text("reload app");
-          }
-        });
-  }
-}
+            ),
+          );
+        } else if (_questionNum == _questions.length - 2) {
+          waitingRoomReset();
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    EndScreen(
+                      _score.toString(),
+                      widget.username,
+                      widget._category,
+                      _challengerScore.toString(),
+                    )
+              // ChatScreen(_score.toString(), widget.username, widget._category,
+              //     _score, _challengerScore),
+            ),
+          );
+        }
+      }
+      );
+      return FutureBuilder(
+      future: _loader,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Scaffold(
+      backgroundColor: Color(0xFF2E3532),
+      );
+      } else if (snapshot.connectionState == ConnectionState.none) {
+      return const Text("Error");
+      } else if (snapshot.connectionState == ConnectionState.done) {
+      return Scaffold(
+      // backgroundColor: Colors.grey[800],
+      backgroundColor: _backgroundColor, // Outer Space Crayola
+      body: Column(
+      children: [
+      Stack(
+      // Circular Timer and Player Icon
+      children: [
+      CircularTimer(_timeLeft),
+      Header(
+      _playerColor,
+      _opponentColor,
+      _score,
+      _challengerScore,
+      widget.username,
+      ),
+      ],
+      ),
+      Question(questions1[_questionNum]['question']
+      as String), // Question
+      Row(
+      // Answers between Timer Bars
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+      LinearTimer(_playerColor, _timeLeft).padding(left: 10),
+      Answers(
+      questions1[_questionNum]['answers']
+      as List<Map<String, dynamic>>,
+      questions1[_questionNum]['image'],
+      _answerQuestion,
+      ),
+      LinearTimer(_opponentColor, 100).padding(right: 10),
+      ],
+      ),
+      ],
+      ),
+      );
+      } else {
+      return const Text("reload app");
+      }
+      });
+    }
+        }
