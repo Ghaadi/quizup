@@ -35,11 +35,11 @@ class Player {
     return score;
   }
 
-  Future<void> SendScore(int a, name) async {
+  Future<void> SendScore(int score, name) async {
     FirebaseFirestore.instance
         .collection("gameRoom")
         .doc("SlODkfYRO7rTcemoz0im")
-        .update({"Salim": a});
+        .update({"Rawad": score});
   }
 
   Future<void> GetOpponentScore(int a, Score, opponent_name) async {

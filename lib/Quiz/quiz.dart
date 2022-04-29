@@ -253,7 +253,7 @@ class QuizState extends State<Quiz> {
         .listen((event) {
       final opponentScore1 = [];
       for (var doc in event.docs) {
-        opponentScore1.add(doc.data()["Rawad"]);
+        opponentScore1.add(doc.data()["Salim"]);
       }
       _challengerScore = opponentScore1[0];
     });
@@ -269,6 +269,7 @@ class QuizState extends State<Quiz> {
       }
       print(questionsAnswered);
       print(_score);
+      // print(opponentScore1);
     });
     return FutureBuilder(
         future: _loader,
