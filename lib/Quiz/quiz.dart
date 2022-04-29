@@ -63,6 +63,7 @@ class QuizState extends State<Quiz> {
     _challengerScore = widget._challengerScore;
     _loader = _fillList();
     _startCountDown();
+    _opponentStartCountDown();
   }
 
   _fillList() async {
@@ -261,8 +262,8 @@ class QuizState extends State<Quiz> {
       print(_score);
       // print(opponentScore1);
 
-      _hasAnswered = questionsAnswered[1];
-      _opponentHasAnswered = questionsAnswered[2];
+      _hasAnswered = questionsAnswered[2];
+      _opponentHasAnswered = questionsAnswered[1];
 
       if (questionsAnswered[1] == true && questionsAnswered[2] == true) {
         if (_questionNum < _questions.length - 2) {
@@ -336,7 +337,7 @@ class QuizState extends State<Quiz> {
                         questions1[_questionNum]['image'],
                         _answerQuestion,
                       ),
-                      LinearTimer(_opponentColor, 100).padding(right: 10),
+                      LinearTimer(_opponentColor, _opponentTimeLeft).padding(right: 10),
                     ],
                   ),
                 ],
