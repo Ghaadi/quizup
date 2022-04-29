@@ -49,14 +49,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 25,
                     ),
-                    const SizedBox(
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                      height: 50,
                       width: 200,
                       child: ElevatedButton(
-                        onPressed: null,
-                        child: Text(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/categories',
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFFFF5252)),
+                        ),
+                        child: const Text(
                           "Play",
                           style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),

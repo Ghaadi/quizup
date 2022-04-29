@@ -5,6 +5,7 @@ import 'package:quizup_prototype/Quiz/quiz.dart';
 import 'package:quizup_prototype/Splash_Screen/screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './Chat/chat_screen.dart';
+import './Home/home-screen.dart';
 
 import './Categories/categories.dart';
 
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => SplashScreen(),
         '/signIn': (context) => SigninScreen(),
+        '/homeScreen': (context) => const HomeScreen(),
         '/categories': (context) => Categories(),
         //'/quiz': (context) => Quiz(_selectedCategory),
         '/signUp': (context) => SignUpScreen(),

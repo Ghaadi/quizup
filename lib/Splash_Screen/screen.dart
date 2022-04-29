@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (user == null) {
         Navigator.pushNamed(context, '/signIn');
       } else {
-        Navigator.pushNamed(context, '/categories');
+        Navigator.pushNamed(context, '/homeScreen');
       }
     });
   }

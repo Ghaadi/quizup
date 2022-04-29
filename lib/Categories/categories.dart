@@ -17,6 +17,7 @@ class _CategoriesState extends State<Categories> {
 
   // final Color _backgroundColor = const Color(0xFF9D858D);
   final Color _backgroundColor = const Color(0xFF294936);
+  // final Color _backgroundColor = const Color(0xFF3C5C49);
 
   final user = FirebaseAuth.instance.currentUser!;
 

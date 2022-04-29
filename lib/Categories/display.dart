@@ -28,7 +28,7 @@ class Display extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 11.39,
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
       child: ElevatedButton(
-        onPressed: () => Navigator.pushReplacement(
+        onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (BuildContext context) =>
