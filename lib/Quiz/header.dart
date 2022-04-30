@@ -40,7 +40,7 @@ class Header extends StatelessWidget {
             final data = snapshot.data!.docs;
 
             for (var element in data) {
-              final opponentScore = element["Salim"];
+              final opponentScore = element["Rawad"];
               final messageSender = element['Salim'];
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

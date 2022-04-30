@@ -201,7 +201,7 @@ class QuizState extends State<Quiz> {
   void answerStatusChange() async {
     FirebaseFirestore.instance
         .collection("gameRoom")
-        .doc("player2")
+        .doc("player1")
         .update({"questionAnswered": true});
   }
 
@@ -209,12 +209,12 @@ class QuizState extends State<Quiz> {
     FirebaseFirestore.instance
         .collection("gameRoom")
         .doc("player1")
-        .update({"questionAnswered": true});
+        .update({"questionAnswered": false});
 
     FirebaseFirestore.instance
         .collection("gameRoom")
         .doc("player2")
-        .update({"questionAnswered": true});
+        .update({"questionAnswered": false});
   }
 
   /* void setOpponentScore() {
@@ -237,7 +237,6 @@ class QuizState extends State<Quiz> {
           });
         } else {
           // _timeLeft = 108;
-          answerStatusChange();
           setState(() {
             _answerQuestion(0);
           });
@@ -267,7 +266,7 @@ class QuizState extends State<Quiz> {
         .listen((event) {
       final opponentScore1 = [];
       for (var doc in event.docs) {
-        opponentScore1.add(doc.data()["Salim"]);
+        opponentScore1.add(doc.data()["Rawad"]);
       }
       _challengerScore = opponentScore1[0];
     });
@@ -281,8 +280,6 @@ class QuizState extends State<Quiz> {
       for (var doc in event.docs) {
         questionsAnswered.add(doc.data()["questionAnswered"]);
       }
-      print(questionsAnswered);
-      print(_score);
       // print(opponentScore1);
 
       _hasAnswered = questionsAnswered[2];
