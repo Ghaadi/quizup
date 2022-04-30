@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -10,13 +11,31 @@ class TransitionScreen extends StatelessWidget {
   final String _category;
   final String _username;
 
-  const TransitionScreen(this._category, this._questionNum, this._score,
-      this._challengerScore, this._username);
+  const TransitionScreen(
+    this._category,
+    this._questionNum,
+    this._score,
+    this._challengerScore,
+    this._username,
+  );
+
+  void answerStatusReset() async {
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("player1")
+        .update({"questionAnswered": false});
+
+    FirebaseFirestore.instance
+        .collection("gameRoom")
+        .doc("player2")
+        .update({"questionAnswered": false});
+  }
 
   @override
   Widget build(BuildContext context) {
+    answerStatusReset();
     Timer(const Duration(seconds: 1), () {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (_) => Quiz(

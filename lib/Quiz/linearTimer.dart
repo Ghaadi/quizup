@@ -13,7 +13,7 @@ class LinearTimer extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 27.43,
       height: MediaQuery.of(context).size.height / 1.71,
       child: FAProgressBar(
-        currentValue: _timeLeft,
+        currentValue: _timeLeft * 10,
         progressColor: _playerColor,
         direction: Axis.vertical,
         verticalDirection: VerticalDirection.up,
