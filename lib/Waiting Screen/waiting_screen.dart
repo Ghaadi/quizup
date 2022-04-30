@@ -44,7 +44,6 @@ class WaitingScreen extends StatelessWidget {
       for (var doc in event.docs) {
         playersState.add(doc.data()["playerjoined"]);
       }
-      print(playersState);
       final player1status = playersState[0];
       final player2status = playersState[1];
 
@@ -54,7 +53,7 @@ class WaitingScreen extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      TransitionScreen(_category, 1, 0, 0, _username)));
+                      TransitionScreen(_category, 1, 0, 0, _username),),);
         });
       }
     });

@@ -167,8 +167,8 @@ class QuizState extends State<Quiz> {
     },
   ];
 
-  var _timeLeft = 106;
-  var _opponentTimeLeft = 106;
+  var _timeLeft = 11;
+  var _opponentTimeLeft = 11;
 
   void _answerQuestion(int points) {
     // _hasAnswered = true;
@@ -205,17 +205,7 @@ class QuizState extends State<Quiz> {
         .update({"questionAnswered": true});
   }
 
-  void questionStatusReset() async {
-    FirebaseFirestore.instance
-        .collection("gameRoom")
-        .doc("player1")
-        .update({"questionAnswered": true});
 
-    FirebaseFirestore.instance
-        .collection("gameRoom")
-        .doc("player2")
-        .update({"questionAnswered": true});
-  }
 
   /* void setOpponentScore() {
     s.SendScore(_score, "Salim");
@@ -228,28 +218,31 @@ class QuizState extends State<Quiz> {
   bool _hasAnswered = false;
   bool _opponentHasAnswered = false;
 
+  var hasChanged = false;
+
   void _startCountDown() {
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!_hasAnswered) {
         if (_timeLeft > 0) {
           setState(() {
             _timeLeft--;
           });
-        } else {
+        } else if(_timeLeft == 0) {
           // _timeLeft = 108;
-          answerStatusChange();
-          setState(() {
-            _answerQuestion(0);
-          });
+          //   answerStatusChange();
+          //   _timeLeft--;
+          // setState(() {
+          //   _answerQuestion(0);
+          // });
         }
       }
     });
   }
 
   void _opponentStartCountDown() {
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!_opponentHasAnswered) {
-        if (_timeLeft > 0) {
+        if (_timeLeft >= 0) {
           setState(() {
             _opponentTimeLeft--;
           });
@@ -257,6 +250,8 @@ class QuizState extends State<Quiz> {
       }
     });
   }
+
+  var hasChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -281,8 +276,8 @@ class QuizState extends State<Quiz> {
       for (var doc in event.docs) {
         questionsAnswered.add(doc.data()["questionAnswered"]);
       }
-      print(questionsAnswered);
-      print(_score);
+      // print(questionsAnswered);
+      // print(_score);
       // print(opponentScore1);
 
       _hasAnswered = questionsAnswered[2];
@@ -304,6 +299,7 @@ class QuizState extends State<Quiz> {
           );
         } else if (_questionNum == _questions.length - 2) {
           waitingRoomReset();
+          // answerStatusReset();
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
                 builder: (BuildContext context) => EndScreen(
